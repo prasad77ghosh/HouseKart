@@ -1,0 +1,30 @@
+.reviewCard {
+  width: 90vw;
+  margin: 0 auto;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  background-color: lightgray;
+  padding: 1rem 2rem 1rem 2rem;
+  border-radius: 10px;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.sec-1 {
+  text-align: center;
+}
+.sec-1 img {
+  width: 9rem;
+}
+.sec-1 p {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.sec-2 span {
+  font-size: 1.4rem;
+  letter-spacing: 0.2px;
+  word-spacing: 3px;
+}

@@ -1,137 +1,62 @@
+footer {
+  margin-top: auto;
+  width: 100%;
+  background-color: lightgray;
+}
 .footer {
+  width: 70%;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 2rem 0 2rem 0;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #203b44;
-  color: #f1f1e6;
+  margin: 0 auto;
+  justify-content: space-between;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .left-footer {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.left-footer h2 {
-  font-size: 2.5rem;
+  text-align: center;
 }
 
 .left-footer p {
-  font-size: 2rem;
+  font-size: 1.3rem;
 }
 
-.store {
-  display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
+.left-footer * {
+  margin-top: 1rem;
 }
+
 .store img {
-  width: 16rem;
+  width: 15rem;
+  margin-right: 1rem;
 }
 
 .mid-footer {
   text-align: center;
-}
-
-.mid-footer h1 {
-  font-size: 4rem;
-  font-weight: 500;
+  margin-right: 3rem;
+  margin-top: 2rem;
 }
 
 .mid-footer p {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
+}
+.mid-footer * {
+  margin-top: 1rem;
 }
 
 .right-footer {
   text-align: center;
-}
-.right-footer h4 {
-  font-size: 2rem;
-}
-
-.right-footer a {
-  text-align: center;
-  cursor: pointer;
+  margin-top: 2rem;
 }
 
 .links {
-  margin-top: 1rem;
+  text-align: center;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 1rem;
 }
 
 .links a {
-  color: #f1f1e6;
-}
-
-.links a:hover {
-  color: rgb(63, 148, 245);
-}
-
-@media (max-width: 700px) {
-  .footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-  }
-
-  .left-footer h2 {
-    font-size: 2rem;
-  }
-
-  .left-footer p {
-    font-size: 1.5rem;
-  }
-
-  .store {
-    margin-top: 1rem;
-  }
-
-  .store img {
-    width: 15rem;
-  }
-
-  .mid-footer h1 {
-    font-size: 4rem;
-  }
-
-  .mid-footer p {
-    font-size: 1.3rem;
-  }
-}
-
-@media (min-width: 701px) and (max-width: 830px) {
-  .left-footer h2 {
-    font-size: 2rem;
-  }
-
-  .left-footer p {
-    font-size: 1.5rem;
-  }
-
-  .store {
-    margin-top: 1rem;
-  }
-
-  .store img {
-    width: 15rem;
-  }
-
-  .mid-footer h1 {
-    font-size: 4rem;
-  }
-
-  .mid-footer p {
-    font-size: 1.3rem;
-  }
+  color: black;
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-top: 1rem;
 }

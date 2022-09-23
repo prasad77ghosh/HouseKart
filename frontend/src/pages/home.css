@@ -1,0 +1,76 @@
+.main-home {
+  width: 100vw;
+  max-width: 100%;
+  text-align: center;
+}
+
+.wel-text {
+  font-size: 3rem;
+  font-family: "Pacifico", cursive;
+  margin-bottom: 4rem;
+}
+
+.main-hero {
+  display: flex;
+  align-items: center;
+}
+
+.left-sec {
+  flex-basis: 50%;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.left-sec h1 {
+  font-size: 4rem;
+}
+
+.right-sec {
+  flex-basis: 50%;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.right-sec img {
+  width: 70rem;
+  margin-bottom: 4rem;
+}
+
+.scroll-btn {
+  background-color: lightgray;
+  padding: 1rem 3rem 1rem 3rem;
+  font-size: 1.7rem;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: auto;
+  font-weight: bold;
+  margin-top: 1rem;
+  background-color: #2163f1;
+  color: #efefef;
+}
+
+.homeHeading {
+  font-size: 2rem;
+}
+
+.products {
+  width: 100%;
+  /* background-color: burlywood; */
+  padding: 1rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.error-cont{
+  margin: 0 auto;
+  margin-top: 25rem;
+}
