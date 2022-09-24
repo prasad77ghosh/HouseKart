@@ -1,0 +1,26 @@
+.products-page {
+  width: 100vw;
+  max-width: 100%;
+}
+
+.products-page > .main-heading {
+  font-size: 2rem;
+  width: 20rem;
+  text-align: center;
+  margin: 0 auto;
+  padding: 1rem;
+  border-bottom: 2px solid lightgray;
+}
+
+.main-products-sec {
+  display: flex;
+  justify-content: center;
+  gap:3rem;
+  width: 90%;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  padding: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+}

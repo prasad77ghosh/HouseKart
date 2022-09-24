@@ -18,16 +18,20 @@ const Navbar = () => {
           <div className={showMenu ? "right-mobile-cont" : "right-cont"}>
             <div className="list-cont">
               <ul>
-                <Link to = "/">
+                <Link to="/">
                   <li>Home</li>
                 </Link>
-                <li>Products</li>
+                <Link to="/products">
+                  <li>Products</li>
+                </Link>
                 <li>Contact</li>
                 <li>About</li>
               </ul>
             </div>
             <div className="search-profile-cart-cont">
-              <ImSearch size={23} />
+              <Link to = "/search">
+                <ImSearch size={23} />
+              </Link>
               <FiShoppingBag size={23} />
               <BsPersonCircle size={23} />
             </div>

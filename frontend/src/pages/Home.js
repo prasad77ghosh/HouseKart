@@ -13,6 +13,7 @@ import Err from "../components/error/Err";
 const Home = () => {
   const dispatch = useDispatch();
   const { status, products, productCount } = useSelector(
+    //reducer
     (state) => state.allProduct
   );
 

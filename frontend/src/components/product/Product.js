@@ -15,13 +15,16 @@ const Product = ({ product }) => {
 
   return (
     <>
-      <Link className="productCard" to={`product/${product._id}`}>
+      <Link className="productCard" to={`/product/${product._id}`}>
         <img src={product.images[0].url} alt={product.name} />
-        <p>{product.name}</p>
-        <div className="reviews">
-          <ReactStars {...options} /> <span>{product.numOfReviews}</span>
+        <div className="info-sec">
+          <h2 className="p-name">{product.name.toLowerCase()}</h2>
+          <div className="p-rating">
+            <ReactStars {...options} />
+            <span>{`(${product.numOfReviews}  Reviews)`}</span>
+          </div>
+          <p className="p-price">{`Price = ₹${product.price}`}</p>
         </div>
-        <p>{`Price = ₹${product.price}`}</p>
       </Link>
     </>
   );

@@ -1,7 +1,8 @@
 import http from "../http";
 
-const getAllProducts = () => {
-  return http.get("/products");
+const getAllProducts = (keyword = "") => {
+  let link = `/products?keyword=${keyword}`;
+  return http.get(link);
 };
 
 const productDetails = (id) => {

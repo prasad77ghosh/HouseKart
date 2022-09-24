@@ -30,8 +30,8 @@ const productSlice = createSlice({
 
 export default productSlice.reducer;
 
-export const allProducts = createAsyncThunk("products/all", async () => {
-  const res = await ProductServices.getAllProducts();
+export const allProducts = createAsyncThunk("products/all", async (keyword) => {
+  const res = await ProductServices.getAllProducts(keyword);
   const data = res.data;
   return data;
 });

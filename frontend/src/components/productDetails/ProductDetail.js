@@ -6,6 +6,9 @@ import { getProductDetails } from "../../Slice/Product/ProductDetails";
 import Slider from "react-slick";
 import ReactStars from "react-rating-stars-component";
 import ReviewCard from "../ReviewCard/ReviewCard";
+import { STATUSES } from "../../status";
+import Loader from "../loader/Loader";
+import Err from "../error/Err";
 
 const ProductDetail = () => {
   // for carosel
@@ -16,6 +19,10 @@ const ProductDetail = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -33,6 +40,25 @@ const ProductDetail = () => {
   useEffect(() => {
     dispatch(getProductDetails(id));
   }, [dispatch, id]);
+
+  if (status === STATUSES.LOADING) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
+
+   if (status === STATUSES.ERROR) {
+     return (
+       <>
+         <div className="error-cont">
+           <Err />
+         </div>
+       </>
+     );
+   }
+
   return (
     <>
       <div className="peoduct-details">
@@ -85,7 +111,7 @@ const ProductDetail = () => {
       {product.reviews && product.reviews[0] ? (
         <div className="reviews">
           {product.reviews.map((review) => (
-            <ReviewCard review={review} />
+            <ReviewCard key={review._id} review={review} />
           ))}
         </div>
       ) : (

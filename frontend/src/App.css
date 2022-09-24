@@ -10,6 +10,7 @@ html {
 
 body {
   font-family: "Fira Sans", sans-serif;
+  position: relative;
 }
 
 li {
@@ -41,5 +42,6 @@ input[type="number"]::-webkit-outer-spin-button {
   display: flex;
   flex-direction: column;
 }
+
 
 
