@@ -39,7 +39,6 @@ const SearchBar = () => {
   const handleFilter = (e) => {
     e.preventDefault();
     const wordEntered = e.target.value;
-    console.log(wordEntered);
     const newFillter = products.filter((product) => {
       return product.name.toLowerCase().includes(wordEntered.toLowerCase());
     });
@@ -62,6 +61,7 @@ const SearchBar = () => {
       navigate("/products");
     }
     setFilteredData([]);
+    setKeyword("");
   };
 
   return (

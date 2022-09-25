@@ -1,7 +1,10 @@
 import http from "../http";
 
-const getAllProducts = (keyword = "") => {
-  let link = `/products?keyword=${keyword}`;
+const getAllProducts = (keyword = "", currentPage = 1) => {
+
+  let link = `/products?keyword=${keyword}&page=${currentPage}`;
+  // console.log(keyword);
+  // console.log(currentPage);
   return http.get(link);
 };
 

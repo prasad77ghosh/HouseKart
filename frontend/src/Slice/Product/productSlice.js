@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import ProductServices from "../../services/productService";
-import {STATUSES} from "../../status"
-
+import { STATUSES } from "../../status";
 
 //get all products slice
 const productSlice = createSlice({
@@ -9,6 +8,7 @@ const productSlice = createSlice({
   initialState: {
     products: [],
     productCount: 0,
+    resultPerPage: 0,
     status: STATUSES.IDLE,
   },
 
@@ -18,9 +18,10 @@ const productSlice = createSlice({
         state.status = STATUSES.LOADING;
       })
       .addCase(allProducts.fulfilled, (state, action) => {
-        state.status = STATUSES.SUCCESS;
         state.products = action.payload.products;
         state.productCount = action.payload.productCount;
+        state.resultPerPage = action.payload.resultPerPage;
+        state.status = STATUSES.SUCCESS;
       })
       .addCase(allProducts.rejected, (state, action) => {
         state.status = STATUSES.ERROR;
@@ -30,8 +31,11 @@ const productSlice = createSlice({
 
 export default productSlice.reducer;
 
-export const allProducts = createAsyncThunk("products/all", async (keyword) => {
-  const res = await ProductServices.getAllProducts(keyword);
-  const data = res.data;
-  return data;
-});
+export const allProducts = createAsyncThunk(
+  "products/all",
+  async ({ keyword, currentPage }) => {
+    const res = await ProductServices.getAllProducts(keyword, currentPage);
+    const data = res.data;
+    return data;
+  }
+);
