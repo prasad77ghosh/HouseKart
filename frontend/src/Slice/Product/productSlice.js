@@ -33,8 +33,14 @@ export default productSlice.reducer;
 
 export const allProducts = createAsyncThunk(
   "products/all",
-  async ({ keyword, currentPage }) => {
-    const res = await ProductServices.getAllProducts(keyword, currentPage);
+  async ({ keyword, currentPage, price, Category, ratings }) => {
+    const res = await ProductServices.getAllProducts(
+      keyword,
+      currentPage,
+      price,
+      Category,
+      ratings
+    );
     const data = res.data;
     return data;
   }
