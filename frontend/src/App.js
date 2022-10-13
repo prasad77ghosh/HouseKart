@@ -1,28 +1,25 @@
-import React from "react";
 import "./App.css";
+import { Container } from "@chakra-ui/react";
+import Navbar from "./components/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Footer from "./components/footer/Footer";
-import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/Home";
-import ProductDetail from "./components/productDetails/ProductDetail";
-import Products from "./pages/Products/Products";
-import SearchBar from "./components/SearchBar/SearchBar";
+import Products from "./pages/Products";
+import Contact from "./pages/Contact";
+import About from "./pages/About";
 
 function App() {
   return (
-    <div className="main-body">
+    <>
       <BrowserRouter>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/products/:keyword" element={<Products />} />
-          <Route path="/search" element={<SearchBar />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
         </Routes>
-        <Footer />
       </BrowserRouter>
-    </div>
+    </>
   );
 }
 

@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: [true, "Please Enter Your Email"],
+   required: [true, "Please Enter Your Email"],
     unique: true,
     validate: [validator.isEmail, "Please enter a valid email"],
   },
@@ -69,12 +69,8 @@ userSchema.methods.comparePassword = async function (enteredPassword) {
 
 //generating password reset token
 userSchema.methods.getPasswordResetToken = function () {
-  // generate token
-
   const resetToken = crypto.randomBytes(20).toString("hex");
-
   //hashing and adding to  user schma
-
   this.resetPasswordToken = crypto
     .createHash("sha256")
     .update(resetToken)
