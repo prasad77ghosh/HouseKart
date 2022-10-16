@@ -1,10 +1,11 @@
+import { Box } from '@chakra-ui/react'
 import React from 'react'
 
 const Home = () => {
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+   <Box minH="100vh">
+
+   </Box>
   )
 }
 
