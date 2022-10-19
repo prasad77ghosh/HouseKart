@@ -21,6 +21,7 @@ const Navbar = () => {
         left="0"
         right="0"
         p={{ base: 1, md: 0, lg: 0 }}
+        zIndex = "1"
       >
         <Container maxW={{ base: "99%", md: "90%", lg: "90%" }}>
           <Flex align="center" justify="space-between">

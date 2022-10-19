@@ -22,7 +22,6 @@ class ApiFeatures {
 
   filter() {
     const copyQuery = { ...this.queryStr };
-    console.log(copyQuery);
     const removeFields = ["keyword", "page", "limit"];
 
     removeFields.forEach((key) => delete copyQuery[key]);
