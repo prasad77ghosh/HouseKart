@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import Kart from "../img/kart.png";
-import { FaSearch } from "react-icons/fa";
+import SearchTab from "./SearchTab";
 import { FaShoppingBag } from "react-icons/fa";
 import { BsPersonCircle } from "react-icons/bs";
 const MobileMenuDrawer = ({ isOpen, onClose }) => {
@@ -80,7 +80,7 @@ const MobileMenuDrawer = ({ isOpen, onClose }) => {
             </VStack>
             <Flex justify="center" align="center" mt="10">
               <HStack spacing="6">
-                <FaSearch size={28} />
+                <SearchTab />
                 <FaShoppingBag size={28} />
                 <BsPersonCircle size={28} />
               </HStack>

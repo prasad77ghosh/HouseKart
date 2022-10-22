@@ -1,10 +1,10 @@
 import { Box, Container, Flex, HStack, Image, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import Kart from "../img/kart.png";
 import { Link } from "react-router-dom";
-import { FaSearch } from "react-icons/fa";
 import { FaShoppingBag } from "react-icons/fa";
 import { BsPersonCircle } from "react-icons/bs";
+import SearchTab from "./SearchTab";
 import { BiMenu } from "react-icons/bi";
 import MobileMenuDrawer from "./MobileMenuDrawer";
 import { useDisclosure } from "@chakra-ui/react";
@@ -21,7 +21,7 @@ const Navbar = () => {
         left="0"
         right="0"
         p={{ base: 1, md: 0, lg: 0 }}
-        zIndex = "1"
+        zIndex="1"
       >
         <Container maxW={{ base: "99%", md: "90%", lg: "90%" }}>
           <Flex align="center" justify="space-between">
@@ -61,7 +61,7 @@ const Navbar = () => {
               spacing={{ md: "3", lg: "5" }}
               display={{ base: "none", md: "flex", lg: "flex" }}
             >
-              <FaSearch size={23} />
+              <SearchTab />
               <FaShoppingBag size={23} />
               <BsPersonCircle size={23} />
             </HStack>

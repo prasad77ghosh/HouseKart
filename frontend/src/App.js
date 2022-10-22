@@ -8,7 +8,7 @@ import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Footer from "./components/Footer";
 import ProductDetail from "./components/ProductDetail";
-
+import SearchBar from "./components/SearchBar";
 
 function App() {
   return (
@@ -17,8 +17,10 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
           <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:keyword" element={<Products />} />
+          <Route path="/search" element={<SearchBar />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
         </Routes>

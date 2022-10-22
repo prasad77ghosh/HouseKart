@@ -1,7 +1,7 @@
 import http from "../http";
-const allProducts = async () => {
-  // let link = "/products"
-  return await http.get("/products");
+const allProducts = async (keyword = "", currentPage = 1) => {
+  let link = `/products?${keyword}&page=${currentPage}`;
+  return await http.get(link);
 };
 
 const productDetails = async (id) => {
