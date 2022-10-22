@@ -163,7 +163,7 @@ const ProductDetail = () => {
             ))}
           </Box>
         ) : (
-          <Text>No Reviews Yet</Text>
+          <Text textAlign="center" my={4}>No Reviews Yet</Text>
         )}
       </Box>
     </>
