@@ -27,9 +27,9 @@ const ReviewCard = ({ review }) => {
         flexDirection = {{base: "column", md: "row"}}
       >
         <Box display="flex" flexDirection="column" alignItems="center" mt={1}>
-          <Image src={Profile} alt="User" width="75px" objectFit="contain" />
+          <Image src={Profile} alt="User" width="60px" objectFit="contain" />
           <Box width="100px" textAlign="center">
-            <Text>{review.name}</Text>
+            <Text fontSize="sm" fontWeight="medium">{review.name}</Text>
           </Box>
         </Box>
 

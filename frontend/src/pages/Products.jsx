@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import PropsBar from "../Components/ExtraComponents/PropsBar";
 import { Box, Text, useToast } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +12,7 @@ const Products = () => {
   const dispatch = useDispatch();
   const toast = useToast();
   const [currentPage, setCurrentPage] = useState(1);
+  const { keyword } = useParams();
 
   const { loading, data, error } = useSelector(
     (state) => state.ProductsReducer
@@ -22,8 +24,8 @@ const Products = () => {
   };
   //API call
   useEffect(() => {
-    dispatch(allProducts(currentPage));
-  }, [dispatch, currentPage]);
+    dispatch(allProducts(keyword, currentPage));
+  }, [dispatch, currentPage, keyword]);
 
   //Error handling
   useEffect(() => {

@@ -1,6 +1,7 @@
 const express = require("express");
 const {
   getAllProducts,
+  getAllProductsRaw,
   createProduct,
   updateProduct,
   deleteProduct,
@@ -14,6 +15,7 @@ const { isAuthUser, authRoles } = require("../middlewares/auth");
 const router = express.Router();
 
 router.route("/products").get(getAllProducts);
+router.route("/raw/products").get(getAllProductsRaw);
 router
   .route("/admin/product/new")
   .post(isAuthUser, authRoles("admin"), createProduct);

@@ -8,13 +8,93 @@ import {
   ModalCloseButton,
   useDisclosure,
   Text,
-  Tooltip
+  Tooltip,
+  Input,
+  IconButton,
+  useToast,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { allRawProducts } from "../../Actions/Products";
 
 const SearchBox = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [keyword, setKeyword] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
+  const { loader, data, error } = useSelector(
+    (state) => state.RawProductsReducer
+  );
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const toast = useToast();
+
+  const { products } = data;
+  console.log(products);
+
+  useEffect(() => {
+    dispatch(allRawProducts());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (error) {
+      toast({
+        title: error,
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+        position: "bottom",
+      });
+      dispatch({
+        type: "clearError",
+      });
+    }
+  }, [dispatch, error, toast]);
+
+  //debounce function
+  function Debounce(func, delay) {
+    let timeOutId;
+    return function (...args) {
+      if (timeOutId) {
+        clearTimeout(timeOutId);
+      }
+      timeOutId = setTimeout(() => {
+        func.call(this, ...args);
+      }, delay);
+    };
+  }
+  const handleFilter = (e) => {
+    e.preventDefault();
+    const wordEntered = e.target.value;
+    const newFillter = products.filter((product) => {
+      return product.name.toLowerCase().includes(wordEntered.toLowerCase());
+    });
+
+    if (wordEntered === "") {
+      setFilteredData([]);
+    } else {
+      setFilteredData(newFillter);
+    }
+    setKeyword(wordEntered);
+  };
+
+  const decoretedFindSuggestion = Debounce(handleFilter, 300);
+
+  const searchSubmitHandler = () => {
+    if (keyword.trim()) {
+      navigate(`/products/${keyword}`);
+    } else {
+      navigate("/products");
+    }
+    setFilteredData([]);
+    setKeyword("");
+    onClose();
+  };
+
+  console.log(filteredData);
+
   return (
     <>
       <Box>
@@ -27,10 +107,27 @@ const SearchBox = () => {
           <Modal isOpen={isOpen} onClose={onClose} size="lg">
             <ModalOverlay />
             <ModalContent>
-              <ModalHeader>Modal Title</ModalHeader>
+              <ModalHeader>Search Products</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
-                <Text>Search Products</Text>
+                <Box display="flex" gap={3}>
+                  <Input
+                    placeholder="Search Products.."
+                    border="2px solid black"
+                    onChange={decoretedFindSuggestion}
+                  />
+                  <Box onClick={searchSubmitHandler}>
+                    <IconButton icon={<BsSearch />} colorScheme="blue" />
+                  </Box>
+                </Box>
+
+                <Box display="flex" flexDirection="column"  mt={4} gap = {3} p = {2}>
+                  {filteredData.slice(0, 15).map((product) => (
+                    <Link to={`/product/${product._id}`} key={product._id}>
+                      <Text fontSize="lg" fontWeight="medium" ml={2}>{product.name}</Text>
+                    </Link>
+                  ))}
+                </Box>
               </ModalBody>
             </ModalContent>
           </Modal>

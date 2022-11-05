@@ -2,6 +2,7 @@ const Product = require("../models/productModel");
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncError = require("../middlewares/catchAsyncError");
 const ApiFeatures = require("../utils/ApiFeatures");
+const { response } = require("express");
 
 //---------------- THIS IS COMPLETE CRUD OPERATION -------------------//
 
@@ -32,6 +33,15 @@ exports.getAllProducts = catchAsyncError(async (req, res) => {
     products,
     productCount,
     resultPerPage,
+  });
+});
+
+//get all Products with out pagination, filter
+exports.getAllProductsRaw = catchAsyncError(async (req, res) => {
+  const products = await Product.find();
+  res.status(201).json({
+    success: true,
+    products,
   });
 });
 

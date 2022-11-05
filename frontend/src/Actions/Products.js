@@ -1,14 +1,13 @@
-import axios from "axios";
 import http from "../http";
 
 export const allProducts =
-  (currentPage = 1) =>
+  (keyword = "", currentPage = 1) =>
   async (dispatch) => {
-    dispatch({
-      type: "getAllProductsReqest",
-    });
-    const url = `/products?page=${currentPage}`;
+    const url = `/products?keyword=${keyword}&page=${currentPage}`;
     try {
+      dispatch({
+        type: "getAllProductsReqest",
+      });
       const { data } = await http.get(url);
       dispatch({
         type: "getAllProductsSuccess",
@@ -26,6 +25,34 @@ export const allProducts =
       });
     }
   };
+
+// all Raw Products
+export const allRawProducts = () => async (dispatch) => {
+  const url = "/raw/products";
+  try {
+    dispatch({
+      type: "getAllRawProductsReqest",
+    });
+    const { data } = await http.get(url);
+
+    dispatch({
+      type: "getAllRawProductsSuccess",
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: "getAllRawProductsFailure",
+      payload:
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString(),
+    });
+  }
+};
+
+
 
 // Product Details
 export const productDetails = (id) => async (dispatch) => {
