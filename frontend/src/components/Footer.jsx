@@ -17,12 +17,7 @@ import { BsFacebook } from "react-icons/bs";
 
 const Footer = () => {
   return (
-    <Box
-      width="100%"
-      bg="gray.300"
-      p={4}
-      mt = "auto"
-    >
+    <Box width="100%" bg="purple.800" p={4} mt="auto" color = "gray.100">
       <Container
         maxW={{ base: "100%", md: "100%", lg: "70%" }}
         textAlign="center"
