@@ -3,7 +3,7 @@ import { Box, Text, Tooltip } from "@chakra-ui/react";
 import SearchBox from "./SearchBox";
 import FilterBox from "./FilterBox";
 
-const PropsBar = () => {
+const PropsBar = ({price, setPrice, category, setCategory, ratings, setRatings}) => {
   return (
     <>
       <Box
@@ -16,15 +16,22 @@ const PropsBar = () => {
         px={1}
         borderRadius="10px"
         position="fixed"
-        right={{base: "1rem", md: "5rem"}}
-        top = "5rem"
+        right={{ base: "1rem", md: "5rem" }}
+        top="5rem"
       >
         <Box cursor="pointer">
           <SearchBox />
         </Box>
 
         <Box cursor="pointer">
-          <FilterBox />
+          <FilterBox
+            price={price}
+            setPrice={setPrice}
+            category={category}
+            setCategory={setCategory}
+            ratings={ratings}
+            setRatings={setRatings}
+          />
         </Box>
       </Box>
     </>

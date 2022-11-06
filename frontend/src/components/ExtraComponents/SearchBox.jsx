@@ -12,6 +12,7 @@ import {
   Input,
   IconButton,
   useToast,
+  Spinner,
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
@@ -24,15 +25,13 @@ const SearchBox = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [keyword, setKeyword] = useState("");
   const [filteredData, setFilteredData] = useState([]);
-  const { loader, data, error } = useSelector(
+  const { loading, data, error } = useSelector(
     (state) => state.RawProductsReducer
   );
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const toast = useToast();
-
   const { products } = data;
-  console.log(products);
 
   useEffect(() => {
     dispatch(allRawProducts());
@@ -93,8 +92,6 @@ const SearchBox = () => {
     onClose();
   };
 
-  console.log(filteredData);
-
   return (
     <>
       <Box>
@@ -121,13 +118,35 @@ const SearchBox = () => {
                   </Box>
                 </Box>
 
-                <Box display="flex" flexDirection="column"  mt={4} gap = {3} p = {2}>
-                  {filteredData.slice(0, 15).map((product) => (
-                    <Link to={`/product/${product._id}`} key={product._id}>
-                      <Text fontSize="lg" fontWeight="medium" ml={2}>{product.name}</Text>
-                    </Link>
-                  ))}
-                </Box>
+                {loading ? (
+                  <>
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      <Spinner size="lg" />
+                    </Box>
+                  </>
+                ) : (
+                  <>
+                    <Box
+                      display="flex"
+                      flexDirection="column"
+                      mt={4}
+                      gap={3}
+                      p={2}
+                    >
+                      {filteredData.slice(0, 15).map((product) => (
+                        <Link to={`/product/${product._id}`} key={product._id}>
+                          <Text fontSize="lg" fontWeight="medium" ml={2}>
+                            {product.name}
+                          </Text>
+                        </Link>
+                      ))}
+                    </Box>
+                  </>
+                )}
               </ModalBody>
             </ModalContent>
           </Modal>

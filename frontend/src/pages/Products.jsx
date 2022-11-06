@@ -12,6 +12,9 @@ const Products = () => {
   const dispatch = useDispatch();
   const toast = useToast();
   const [currentPage, setCurrentPage] = useState(1);
+  const [price, setPrice] = useState([0, 200000]);
+  const [category, setCategory] = useState("");
+  const [ratings, setRatings] = useState(0);
   const { keyword } = useParams();
 
   const { loading, data, error } = useSelector(
@@ -22,10 +25,13 @@ const Products = () => {
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
   };
+
+  // let count = filteredProductCount;
+
   //API call
   useEffect(() => {
-    dispatch(allProducts(keyword, currentPage));
-  }, [dispatch, currentPage, keyword]);
+    dispatch(allProducts(keyword, currentPage, price, category, ratings));
+  }, [dispatch, keyword, currentPage, price, category, ratings]);
 
   //Error handling
   useEffect(() => {
@@ -46,7 +52,14 @@ const Products = () => {
   return (
     <>
       <Box width="80%" margin="0 auto">
-        <PropsBar />
+        <PropsBar
+          price={price}
+          setPrice={setPrice}
+          category={category}
+          setCategory={setCategory}
+          ratings={ratings}
+          setRatings = {setRatings}
+        />
         <Box
           textAlign="center"
           borderBottom="2px solid tomato"

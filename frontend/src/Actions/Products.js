@@ -1,9 +1,14 @@
 import http from "../http";
 
 export const allProducts =
-  (keyword = "", currentPage = 1) =>
+  (keyword = "", currentPage = 1, price = [0, 200000], category, ratings = 0) =>
   async (dispatch) => {
-    const url = `/products?keyword=${keyword}&page=${currentPage}`;
+    let url = `/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+
+    if (category) {
+      url = `/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
+    }
+
     try {
       dispatch({
         type: "getAllProductsReqest",
@@ -51,8 +56,6 @@ export const allRawProducts = () => async (dispatch) => {
     });
   }
 };
-
-
 
 // Product Details
 export const productDetails = (id) => async (dispatch) => {

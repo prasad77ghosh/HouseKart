@@ -17,8 +17,6 @@
   color: red;
 }
 
-
-
 /* paginaation Box */
 
 .paginationBox {
@@ -31,7 +29,6 @@
   display: flex;
   justify-content: center;
   padding: 0;
-  
 }
 
 .page-item {
@@ -41,7 +38,6 @@
   padding: 1vmax 1.5vmax;
   transition: all 0.3s;
   cursor: pointer;
-  
 }
 .page-item:first-child {
   border-radius: 5px 0 0 5px;
@@ -70,4 +66,49 @@
 
 .pageLinkActive {
   color: white;
+}
+
+/* Price Box */
+.price-box {
+  padding: 15px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border-radius: 10px;
+  background-color: #553c9a;
+  color: white;
+}
+
+.category-box {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  padding: 15px;
+  background-color: lightblue;
+  margin-top: 1rem;
+  background-color: #553c9a;
+  color: white;
+  border-radius: 10px;
+}
+
+.rating-box{
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  padding: 15px;
+  background-color: lightblue;
+  margin-top: 1rem;
+  background-color: #553c9a;
+  color: white;
+  border-radius: 10px;
+}
+
+/* scroll bar design */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: tomato;
+  border-radius: 10px;
 }
