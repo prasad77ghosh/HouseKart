@@ -2,6 +2,8 @@ const cookieParser = require("cookie-parser");
 const express = require("express");
 const cors = require("cors");
 const errorMiddleware = require("./middlewares/error");
+const bodyParser = require("body-parser");
+const fileupload = require("express-fileupload");
 const app = express();
 const corsOptions = {
   origin: "http://localhost:3000",
@@ -11,6 +13,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileupload());
 
 //routes import
 const productsRoutes = require("./routes/productRoute");

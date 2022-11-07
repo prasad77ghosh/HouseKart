@@ -2,6 +2,7 @@ const app = require("./app");
 
 const dotenv = require("dotenv");
 const connectDB = require("./config/database");
+const cloudinary = require("cloudinary");
 
 //handling uncought expection
 process.on("uncaughtException", (error) => {
@@ -14,6 +15,11 @@ process.on("uncaughtException", (error) => {
 dotenv.config({ path: "backend/config/config.env" });
 
 connectDB();
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+});
 const server = app.listen(process.env.PORT, () => {
   console.log(`Listaning on port ${process.env.PORT}`);
 });

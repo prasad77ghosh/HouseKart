@@ -29,7 +29,9 @@ const MobilaNavbar = () => {
           <FaShoppingBag size={22} />
         </Box>
         <Box mt="1px">
-          <BsPersonCircle size={22} />
+          <Link to="/login">
+            <BsPersonCircle size={22} />
+          </Link>
         </Box>
         <Box onClick={onOpen} mt="2px">
           <HiOutlineMenu size={23} />
@@ -42,7 +44,7 @@ const MobilaNavbar = () => {
           color="gray.100"
           display={{ base: "block", md: "none" }}
         >
-          <DrawerCloseButton/>
+          <DrawerCloseButton />
           <DrawerHeader>
             <Flex align="center" justify="center" mt={5} mr={3}>
               <Image src={Kart} alt="Logo" boxSize="50px" />

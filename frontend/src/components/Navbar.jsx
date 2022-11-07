@@ -62,7 +62,9 @@ const Navbar = () => {
               alignItems="center"
             >
               <FaShoppingBag size={23} />
-              <BsPersonCircle size={24} />
+              <Link to = "/login">
+                <BsPersonCircle size={24} />
+              </Link>
             </HStack>
             <Box display={{ base: "block", md: "none" }}>
               <MobilaNavbar />

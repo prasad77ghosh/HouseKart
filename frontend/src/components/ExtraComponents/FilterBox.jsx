@@ -84,11 +84,11 @@ const FilterBox = ({
                   <Box display="flex" gap={5} mt={4}>
                     <FormControl>
                       <FormLabel>Min Range</FormLabel>
-                      <Input type="number" value={price[0]} />
+                      <Input type="number" value={price[0]} readOnly/>
                     </FormControl>
                     <FormControl>
                       <FormLabel>Max Range</FormLabel>
-                      <Input type="number" value={price[1]} />
+                      <Input type="number" value={price[1]} readOnly/>
                     </FormControl>
                   </Box>
                   <Box mt={5} p={2}>
