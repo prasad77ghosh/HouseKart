@@ -25,6 +25,7 @@ const AuthReducer = createReducer(initialState, {
     state.error = action.payload;
   },
 
+  //register user
   registerUserRequest: (state) => {
     state.loading = true;
     state.isAuthenticated = false;
@@ -40,6 +41,19 @@ const AuthReducer = createReducer(initialState, {
     state.isAuthenticated = false;
     state.error = action.payload;
   },
+
+  //logout user
+  logoutUserSuccess: (state, action) => {
+    state.loading = false;
+    state.user = null;
+    state.isAuthenticated = false;
+  },
+  logoutUserFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  },
+
+  //load user
   loadUserRequest: (state) => {
     state.loading = true;
     state.isAuthenticated = false;

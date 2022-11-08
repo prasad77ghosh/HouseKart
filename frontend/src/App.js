@@ -10,6 +10,8 @@ import Register from "./Pages/Auth/Register";
 import store from "./store";
 import { useEffect } from "react";
 import { userInfo } from "./Actions/Auth";
+import UserInfo from "./Components/UserComps/UserInfo";
+import ProtrctedRoute from "./ProtectedRoutes/ProtectedRoute";
 function App() {
   useEffect(() => {
     store.dispatch(userInfo());
@@ -32,6 +34,9 @@ function App() {
           <Route path="products/:price" element={<Products />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route element={<ProtrctedRoute />}>
+            <Route path="account" element={<UserInfo />} />
+          </Route>
         </Routes>
         <Footer />
       </BrowserRouter>

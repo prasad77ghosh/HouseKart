@@ -44,6 +44,13 @@ const Login = () => {
       });
     }
     dispatch(userLogin(email, password));
+     toast({
+       title: "LoggedIn Succesfully...",
+       status: "success",
+       duration: 2000,
+       isClosable: true,
+       position: "bottom",
+     });
   };
 
   useEffect(() => {
@@ -61,7 +68,7 @@ const Login = () => {
     }
 
     if (isAuthenticated) {
-      navigate("/account");
+      navigate("/");
     }
   }, [dispatch, error, toast, isAuthenticated, navigate]);
 

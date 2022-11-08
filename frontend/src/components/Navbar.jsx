@@ -5,7 +5,10 @@ import { Link } from "react-router-dom";
 import { FaShoppingBag } from "react-icons/fa";
 import { BsPersonCircle } from "react-icons/bs";
 import MobilaNavbar from "./ExtraComponents/MobilaNavbar";
+import UserOptions from "./ExtraComponents/UserOptions";
+import { useSelector } from "react-redux";
 const Navbar = () => {
+  const { isAuthenticated, user } = useSelector((state) => state.AuthReducer);
   return (
     <>
       <Box
@@ -53,6 +56,13 @@ const Navbar = () => {
               <Link to="/about">
                 <Text fontWeight="medium">About</Text>
               </Link>
+              {user && user.role === "admin" ? (
+                <Link to="/dashbaord">
+                  <Text fontWeight="medium">Dashboard</Text>
+                </Link>
+              ) : (
+                <></>
+              )}
             </HStack>
 
             <HStack
@@ -62,9 +72,13 @@ const Navbar = () => {
               alignItems="center"
             >
               <FaShoppingBag size={23} />
-              <Link to = "/login">
-                <BsPersonCircle size={24} />
-              </Link>
+              {isAuthenticated ? (
+                <UserOptions user={user} />
+              ) : (
+                <Link to = "/login">
+                  <BsPersonCircle size={24} />
+                </Link>
+              )}
             </HStack>
             <Box display={{ base: "block", md: "none" }}>
               <MobilaNavbar />

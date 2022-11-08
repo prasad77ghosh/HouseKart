@@ -91,7 +91,7 @@ const Register = () => {
     }
 
     if (isAuthenticated) {
-      navigate("/account");
+      navigate("/");
     }
   }, [dispatch, error, toast, isAuthenticated, navigate]);
 

@@ -53,6 +53,28 @@ export const userRegister =
     }
   };
 
+//logout user
+
+export const userLogout = () => async (dispatch) => {
+  const url = "/logout";
+  try {
+    await http.get(url);
+    dispatch({
+      type: "logoutUserSuccess",
+    });
+  } catch (error) {
+    dispatch({
+      type: "logoutUserFailure",
+      payload:
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString(),
+    });
+  }
+};
+
 //load user information
 export const userInfo = () => async (dispatch) => {
   const url = "/me";

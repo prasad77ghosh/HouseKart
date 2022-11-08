@@ -19,9 +19,12 @@ import { HiOutlineMenu } from "react-icons/hi";
 import { FaShoppingBag } from "react-icons/fa";
 import { BsPersonCircle } from "react-icons/bs";
 import Kart from "../../img/kart.png";
+import { useSelector } from "react-redux";
+import UserOptions from "./UserOptions";
 
 const MobilaNavbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isAuthenticated, user } = useSelector((state) => state.AuthReducer);
   return (
     <>
       <Box display="flex" alignItems="center" gap={3}>
@@ -29,9 +32,13 @@ const MobilaNavbar = () => {
           <FaShoppingBag size={22} />
         </Box>
         <Box mt="1px">
-          <Link to="/login">
-            <BsPersonCircle size={22} />
-          </Link>
+          {isAuthenticated ? (
+              <UserOptions user={user} />
+          ) : (
+            <Link to="/login">
+              <BsPersonCircle size={22} />
+            </Link>
+          )}
         </Box>
         <Box onClick={onOpen} mt="2px">
           <HiOutlineMenu size={23} />
@@ -86,6 +93,18 @@ const MobilaNavbar = () => {
                   </Text>
                 </ListItem>
               </Link>
+
+              {user && user.role === "admin" ? (
+                <Link to="/dashboard">
+                  <ListItem mt={2} onClick={onClose}>
+                    <Text fontWeight="medium" fontSize="20px">
+                      Dashboard
+                    </Text>
+                  </ListItem>
+                </Link>
+              ) : (
+                <></>
+              )}
             </List>
           </DrawerBody>
         </DrawerContent>
