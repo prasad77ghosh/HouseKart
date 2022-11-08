@@ -13,34 +13,30 @@ import {
 import React from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { MdOutlineEmail } from "react-icons/md";
-import { AiOutlineEye } from "react-icons/ai";
-import { AiOutlineEyeInvisible } from "react-icons/ai";
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Profile from "../../img/Profile.png";
-import { userRegister } from "../../Actions/Auth";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { profileUpdate } from "../../Actions/Profile";
+import Profile from "../../img/Profile.png";
+import { userInfo } from "../../Actions/Auth";
 
-const Register = () => {
-  const [show, setShow] = useState(false);
-  const [showC, setShowC] = useState(false);
+const UpdateProfile = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [avatar, setAvatar] = useState(Profile);
+  const [avatar, setAvatar] = useState("");
   const [avatarPreview, setAvatarPreview] = useState(Profile);
   const dispatch = useDispatch();
   const toast = useToast();
   const navigate = useNavigate();
-  const { loading, isAuthenticated, error } = useSelector(
-    (state) => state.AuthReducer
-  );
 
+  const { user } = useSelector((state) => state.AuthReducer);
+  const { loading, isUpdated, error } = useSelector(
+    (state) => state.ProfileReducer
+  );
   // Image Upload
-  const imageUploadHandler = (e) => {
+  const imageUpdateHandler = (e) => {
     const reader = new FileReader();
+
     reader.onload = () => {
       if (reader.readyState === 2) {
         setAvatarPreview(reader.result);
@@ -51,29 +47,18 @@ const Register = () => {
     reader.readAsDataURL(e.target.files[0]);
   };
 
-  const registerHandler = () => {
-    if (!name || !email || !password || !confirmPassword) {
-      toast({
-        title: "Please Fill all the Feilds",
-        status: "warning",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
-      });
-      return;
-    }
-    if (password !== confirmPassword) {
-      toast({
-        title: "Passwords did not match",
-        status: "warning",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
-      });
-      return;
-    }
+  console.log(avatar)
 
-    dispatch(userRegister(name, email, password, avatar));
+  useEffect(() => {
+    if (user) {
+      setName(user.name);
+      setEmail(user.email);
+      setAvatarPreview(user.avatar.url);
+    }
+  }, [user]);
+
+  const updateProfileHandler = () => {
+    dispatch(profileUpdate(name, email, avatar));
   };
 
   useEffect(() => {
@@ -90,11 +75,21 @@ const Register = () => {
       });
     }
 
-    if (isAuthenticated) {
+    if (isUpdated) {
+      toast({
+        title: "Profile updated successfully..",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+        position: "bottom",
+      });
+      dispatch(userInfo());
       navigate("/account");
+      dispatch({
+        type: "updateProfileReset",
+      });
     }
-  }, [dispatch, error, toast, isAuthenticated, navigate]);
-
+  }, [dispatch, error, isUpdated, toast, navigate]);
   return (
     <>
       <Box p={2} height="100vh">
@@ -112,15 +107,12 @@ const Register = () => {
             fontSize={{ base: "20px", md: "25px", lg: "25px" }}
             mb={2}
           >
-            Register Your Account
+            Update Your Account
           </Text>
           <FormControl isRequired>
             <FormLabel fontSize={{ base: "12px", md: "15px" }}>Name</FormLabel>
             <InputGroup>
-              <InputLeftElement
-                pointerEvents="none"
-                children={<BsFillPersonFill size={20} />}
-              />
+              <InputLeftElement children={<BsFillPersonFill size={20} />} />
               <Input
                 type="text"
                 placeholder="Enter Your Name"
@@ -135,10 +127,7 @@ const Register = () => {
           <FormControl isRequired mt={2}>
             <FormLabel fontSize={{ base: "12px", md: "15px" }}>Email</FormLabel>
             <InputGroup>
-              <InputLeftElement
-                pointerEvents="none"
-                children={<MdOutlineEmail size={20} />}
-              />
+              <InputLeftElement children={<MdOutlineEmail size={20} />} />
               <Input
                 type="email"
                 placeholder="Enter Your Email"
@@ -150,59 +139,6 @@ const Register = () => {
               />
             </InputGroup>
           </FormControl>
-          <Box display={{ base: "block", md: "flex" }} gap={3}>
-            <FormControl isRequired mt={2}>
-              <FormLabel fontSize={{ base: "12px", md: "15px" }}>
-                Passoword
-              </FormLabel>
-              <InputGroup>
-                <InputLeftElement>
-                  <Box onClick={() => setShow(!show)} cursor="pointer">
-                    {show ? (
-                      <AiOutlineEye size={20} />
-                    ) : (
-                      <AiOutlineEyeInvisible size={20} />
-                    )}
-                  </Box>
-                </InputLeftElement>
-                <Input
-                  type={show ? "text" : "password"}
-                  placeholder="Enter Your Password"
-                  fontSize="16px"
-                  borderColor="gray.50"
-                  focusBorderColor="#68D391"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </InputGroup>
-            </FormControl>
-            <FormControl isRequired mt={2}>
-              <FormLabel fontSize={{ base: "12px", md: "15px" }}>
-                Confirm Password
-              </FormLabel>
-              <InputGroup>
-                <InputLeftElement>
-                  <Box onClick={() => setShowC(!showC)} cursor="pointer">
-                    {showC ? (
-                      <AiOutlineEye size={20} />
-                    ) : (
-                      <AiOutlineEyeInvisible size={20} />
-                    )}
-                  </Box>
-                </InputLeftElement>
-                <Input
-                  type={showC ? "text" : "password"}
-                  placeholder="Enter Your Confirm Password"
-                  fontSize="16px"
-                  borderColor="gray.50"
-                  focusBorderColor="#68D391"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                />
-              </InputGroup>
-            </FormControl>
-          </Box>
-
           <FormControl mt={2}>
             <FormLabel fontSize={{ base: "12px", md: "15px" }}>
               Upload Your Profile Pic
@@ -225,7 +161,7 @@ const Register = () => {
                   zIndex="1"
                   cursor="pointer"
                   accept="image/*"
-                  onChange={imageUploadHandler}
+                  onChange={imageUpdateHandler}
                 />
                 <Button
                   position="absolute"
@@ -254,18 +190,11 @@ const Register = () => {
               colorScheme="teal"
               fontSize={{ base: "13px", md: "15px" }}
               letterSpacing={1}
-              onClick={registerHandler}
               isLoading={loading}
+              onClick={updateProfileHandler}
             >
-              Register
+              Update
             </Button>
-            <Link to="/login">
-              <Box textAlign="center" mt={1}>
-                <Button colorScheme="cyan" variant="link">
-                  Login To Your Account
-                </Button>
-              </Box>
-            </Link>
           </Box>
         </Box>
       </Box>
@@ -273,4 +202,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default UpdateProfile;

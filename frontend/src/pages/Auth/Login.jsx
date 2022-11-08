@@ -68,7 +68,7 @@ const Login = () => {
     }
 
     if (isAuthenticated) {
-      navigate("/");
+      navigate("/account");
     }
   }, [dispatch, error, toast, isAuthenticated, navigate]);
 

@@ -5,6 +5,7 @@ const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 const cloudinary = require("cloudinary");
+const { log } = require("console");
 
 //Register a user
 
@@ -178,6 +179,22 @@ exports.updateProfile = catchAsyncError(async (req, res, next) => {
   };
 
   //we will add cloudinary later
+  if (req.body.avatar !== "") {
+    const user = await User.findById(req.user.id);
+    const image_id = user.avatar.public_id;
+    console.log(image_id);
+    await cloudinary.v2.uploader.destroy(image_id);
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: "HouseKart",
+      width: 150,
+      crop: "scale",
+    });
+    newUserData.avatar = {
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
+    };
+    console.log(myCloud.public_id);
+  }
 
   const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
     new: true,

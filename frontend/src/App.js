@@ -12,6 +12,8 @@ import { useEffect } from "react";
 import { userInfo } from "./Actions/Auth";
 import UserInfo from "./Components/UserComps/UserInfo";
 import ProtrctedRoute from "./ProtectedRoutes/ProtectedRoute";
+import UpdateProfile from "./Components/UserComps/UpdateProfile";
+import UpdatePassword from "./Components/UserComps/UpdatePassword";
 function App() {
   useEffect(() => {
     store.dispatch(userInfo());
@@ -36,6 +38,8 @@ function App() {
           <Route path="register" element={<Register />} />
           <Route element={<ProtrctedRoute />}>
             <Route path="account" element={<UserInfo />} />
+            <Route path="me/update" element={<UpdateProfile />} />
+            <Route path="password/update" element={<UpdatePassword />} />
           </Route>
         </Routes>
         <Footer />

@@ -51,7 +51,11 @@ const UserInfo = () => {
               objectFit="cover"
               borderRadius="full"
             />
-            <Button colorScheme="whatsapp" size="sm">
+            <Button
+              colorScheme="whatsapp"
+              size="sm"
+              onClick={() => navigate("/me/update")}
+            >
               Edit Profile
             </Button>
           </Box>
@@ -90,7 +94,11 @@ const UserInfo = () => {
               <Button colorScheme="purple" size="sm">
                 My Orders
               </Button>
-              <Button colorScheme="purple" size="sm">
+              <Button
+                colorScheme="purple"
+                size="sm"
+                onClick={() => navigate("/password/update")}
+              >
                 Change Password
               </Button>
             </Box>
