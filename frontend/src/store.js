@@ -5,6 +5,8 @@ import RawProductsReducer from "./Reducers/RewProducts";
 import AuthReducer from "./Reducers/AuthReducer";
 import ProfileReducer from "./Reducers/ProfileReducer";
 import PasswordReducer from "./Reducers/PasswordReducer";
+import CartReducer from "./Reducers/CartReducer";
+
 const store = configureStore({
   reducer: {
     ProductsReducer,
@@ -13,6 +15,7 @@ const store = configureStore({
     AuthReducer,
     ProfileReducer,
     PasswordReducer,
+    Cart: CartReducer,
   },
 });
 

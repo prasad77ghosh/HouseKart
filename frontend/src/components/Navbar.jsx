@@ -9,6 +9,7 @@ import UserOptions from "./ExtraComponents/UserOptions";
 import { useSelector } from "react-redux";
 const Navbar = () => {
   const { isAuthenticated, user } = useSelector((state) => state.AuthReducer);
+  const { CartItems } = useSelector((state) => state.Cart);
   return (
     <>
       <Box
@@ -71,11 +72,32 @@ const Navbar = () => {
               cursor="pointer"
               alignItems="center"
             >
-              <FaShoppingBag size={23} />
+              <Link to="/cart">
+                <Box position="relative">
+                  {CartItems.length >= 1 && (
+                    <>
+                      <Box
+                        bg="red"
+                        fontWeight="medium"
+                        textAlign="center"
+                        borderRadius="full"
+                        position="absolute"
+                        padding={1}
+                        left="15px"
+                        bottom="10px"
+                        height="21px"
+                      >
+                        <Text fontSize="12px">{CartItems.length}</Text>
+                      </Box>
+                    </>
+                  )}
+                  <FaShoppingBag size={23} />
+                </Box>
+              </Link>
               {isAuthenticated ? (
                 <UserOptions user={user} />
               ) : (
-                <Link to = "/login">
+                <Link to="/login">
                   <BsPersonCircle size={24} />
                 </Link>
               )}

@@ -14,6 +14,7 @@ import {
   useToast,
   Spinner,
 } from "@chakra-ui/react";
+import { addItemsToCart } from "../../Actions/CartAct";
 
 import ReviewCard from "./ReviewCard";
 const ProductDetails = () => {
@@ -26,6 +27,17 @@ const ProductDetails = () => {
   } = useSelector((state) => state.ProductDetailsReducer);
   const { id } = useParams();
   const toast = useToast();
+
+  const addToCartHandler = () => {
+    dispatch(addItemsToCart(id, quantity));
+    toast({
+      title: "add to cart successfully",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+      position: "bottom",
+    });
+  };
 
   const increaseQuantity = () => {
     if (product.Stock <= quantity) {
@@ -182,7 +194,12 @@ const ProductDetails = () => {
                   </Box>
 
                   <Box fontSize="xl" display="flex" alignItems="center" gap={3}>
-                    <Button colorScheme="orange" size="sm" borderRadius="15px">
+                    <Button
+                      colorScheme={"orange"}
+                      size="sm"
+                      borderRadius="15px"
+                      onClick={addToCartHandler}
+                    >
                       Add To Cart
                     </Button>
                     <Text color={product.Stock < 1 ? "red" : "greenyellow"}>

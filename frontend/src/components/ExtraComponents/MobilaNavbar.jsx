@@ -29,11 +29,13 @@ const MobilaNavbar = () => {
     <>
       <Box display="flex" alignItems="center" gap={3}>
         <Box>
-          <FaShoppingBag size={22} />
+          <Link to = "/cart">
+            <FaShoppingBag size={22} />
+          </Link>
         </Box>
         <Box mt="1px">
           {isAuthenticated ? (
-              <UserOptions user={user} />
+            <UserOptions user={user} />
           ) : (
             <Link to="/login">
               <BsPersonCircle size={22} />

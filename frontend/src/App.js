@@ -16,6 +16,7 @@ import UpdateProfile from "./Components/UserComps/UpdateProfile";
 import UpdatePassword from "./Components/UserComps/UpdatePassword";
 import ForgotPassword from "./Components/UserComps/ForgotPassword";
 import ResetPassword from "./Components/UserComps/ResetPassword";
+import Cart from "./Pages/Cart";
 function App() {
   useEffect(() => {
     store.dispatch(userInfo());
@@ -40,6 +41,7 @@ function App() {
           <Route path="register" element={<Register />} />
           <Route path="password/forgot" element={<ForgotPassword />} />
           <Route path="password/reset/:token" element={<ResetPassword />} />
+          <Route path="cart" element={<Cart />} />
           <Route element={<ProtrctedRoute />}>
             <Route path="account" element={<UserInfo />} />
             <Route path="me/update" element={<UpdateProfile />} />
