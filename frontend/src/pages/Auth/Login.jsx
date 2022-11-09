@@ -153,7 +153,7 @@ const Login = () => {
             >
               Login
             </Button>
-            <Link>
+            <Link to = "/password/forgot">
               <Box textAlign="center">
                 <Button colorScheme="cyan" variant="link">
                   Forgot Password

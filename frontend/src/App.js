@@ -14,6 +14,8 @@ import UserInfo from "./Components/UserComps/UserInfo";
 import ProtrctedRoute from "./ProtectedRoutes/ProtectedRoute";
 import UpdateProfile from "./Components/UserComps/UpdateProfile";
 import UpdatePassword from "./Components/UserComps/UpdatePassword";
+import ForgotPassword from "./Components/UserComps/ForgotPassword";
+import ResetPassword from "./Components/UserComps/ResetPassword";
 function App() {
   useEffect(() => {
     store.dispatch(userInfo());
@@ -36,6 +38,8 @@ function App() {
           <Route path="products/:price" element={<Products />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="password/forgot" element={<ForgotPassword />} />
+          <Route path="password/reset/:token" element={<ResetPassword />} />
           <Route element={<ProtrctedRoute />}>
             <Route path="account" element={<UserInfo />} />
             <Route path="me/update" element={<UpdateProfile />} />

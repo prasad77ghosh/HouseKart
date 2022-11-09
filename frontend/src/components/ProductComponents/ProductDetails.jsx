@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -18,6 +18,7 @@ import {
 import ReviewCard from "./ReviewCard";
 const ProductDetails = () => {
   const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(1);
   const {
     loading,
     data: product,
@@ -25,6 +26,36 @@ const ProductDetails = () => {
   } = useSelector((state) => state.ProductDetailsReducer);
   const { id } = useParams();
   const toast = useToast();
+
+  const increaseQuantity = () => {
+    if (product.Stock <= quantity) {
+      toast({
+        title: `Product stock is ${product.Stock}`,
+        status: "warning",
+        duration: 2000,
+        isClosable: true,
+        position: "bottom",
+      });
+      return;
+    }
+    const qty = quantity + 1;
+    setQuantity(qty);
+  };
+
+  const decreaseQuantity = () => {
+    if (quantity <= 1) {
+      toast({
+        title: "Minimum quantity must be 1",
+        status: "warning",
+        duration: 2000,
+        isClosable: true,
+        position: "bottom",
+      });
+      return;
+    }
+    const qty = quantity - 1;
+    setQuantity(qty);
+  };
 
   //React Star
   const options = {
@@ -130,18 +161,19 @@ const ProductDetails = () => {
                       fontWeight="medium"
                     >{`Price :- ₹${product.price}`}</Text>
                     <Box display="flex" alignItems="center" gap={2} mt={2}>
-                      <Button colorScheme="purple">
+                      <Button colorScheme="purple" onClick={decreaseQuantity}>
                         <Text fontSize="3xl" mb={1}>
                           -
                         </Text>
                       </Button>
                       <Input
-                        value="1"
+                        value={quantity}
                         type="number"
                         width="55px"
                         textAlign="center"
+                        readOnly
                       />
-                      <Button colorScheme="purple">
+                      <Button colorScheme="purple" onClick={increaseQuantity}>
                         <Text fontSize="2xl" mb={1}>
                           +
                         </Text>
@@ -173,7 +205,11 @@ const ProductDetails = () => {
               <Box>
                 {product.reviews && product.reviews[0] ? (
                   <>
-                    <Box borderBottom="2px solid tomato" width={{base: "50%", md: "10%"}} margin="0 auto">
+                    <Box
+                      borderBottom="2px solid tomato"
+                      width={{ base: "50%", md: "10%" }}
+                      margin="0 auto"
+                    >
                       <Text
                         textAlign="center"
                         fontSize="xl"
