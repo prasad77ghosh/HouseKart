@@ -47,7 +47,7 @@ const UpdateProfile = () => {
     reader.readAsDataURL(e.target.files[0]);
   };
 
-  console.log(avatar)
+  console.log(avatar);
 
   useEffect(() => {
     if (user) {
@@ -60,6 +60,10 @@ const UpdateProfile = () => {
   const updateProfileHandler = () => {
     dispatch(profileUpdate(name, email, avatar));
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     if (error) {

@@ -13,8 +13,11 @@ const Home = () => {
   const { loading, data, error } = useSelector(
     (state) => state.ProductsReducer
   );
-
   const { products } = data;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     dispatch(allProducts());

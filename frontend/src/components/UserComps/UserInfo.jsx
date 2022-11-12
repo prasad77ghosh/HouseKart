@@ -7,6 +7,10 @@ const UserInfo = () => {
   const { user, isAuthenticated } = useSelector((state) => state.AuthReducer);
   const navigate = useNavigate();
 
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
+
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/login");

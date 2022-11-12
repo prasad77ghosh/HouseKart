@@ -45,6 +45,11 @@ const ResetPassword = () => {
     dispatch(passwordReset(token, newPassword, confirmPassword));
   };
 
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
+
   useEffect(() => {
     if (error) {
       toast({

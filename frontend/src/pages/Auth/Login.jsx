@@ -14,23 +14,27 @@ import React from "react";
 import { MdOutlineEmail } from "react-icons/md";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { userLogin } from "../../Actions/Auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Login = () => {
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const toast = useToast();
+  const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, isAuthenticated, error } = useSelector(
     (state) => state.AuthReducer
   );
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -38,21 +42,16 @@ const Login = () => {
       toast({
         title: "Please Fill all the Feilds",
         status: "warning",
-        duration: 5000,
+        duration: 2000,
         isClosable: true,
         position: "bottom",
       });
     }
     dispatch(userLogin(email, password));
-     toast({
-       title: "LoggedIn Succesfully...",
-       status: "success",
-       duration: 2000,
-       isClosable: true,
-       position: "bottom",
-     });
   };
 
+  const redirect = searchParams ? "/shipping" : "/account";
+  console.log(redirect);
   useEffect(() => {
     if (error) {
       toast({
@@ -68,9 +67,9 @@ const Login = () => {
     }
 
     if (isAuthenticated) {
-      navigate("/account");
+      navigate(redirect);
     }
-  }, [dispatch, error, toast, isAuthenticated, navigate]);
+  }, [dispatch, error, toast, isAuthenticated, navigate, redirect]);
 
   return (
     <>
@@ -153,7 +152,7 @@ const Login = () => {
             >
               Login
             </Button>
-            <Link to = "/password/forgot">
+            <Link to="/password/forgot">
               <Box textAlign="center">
                 <Button colorScheme="cyan" variant="link">
                   Forgot Password

@@ -34,6 +34,9 @@ const Register = () => {
   const dispatch = useDispatch();
   const toast = useToast();
   const navigate = useNavigate();
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
   const { loading, isAuthenticated, error } = useSelector(
     (state) => state.AuthReducer
   );

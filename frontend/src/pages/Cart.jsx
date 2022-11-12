@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import CartItemBox from "../Components/ExtraComponents/CartItemBox";
 import { Box, Text, Button, Input } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,10 +7,12 @@ import { addItemsToCart } from "../Actions/CartAct";
 import { removeItemFromCart } from "../Actions/CartAct";
 import { MdRemoveShoppingCart } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const { CartItems } = useSelector((state) => state.Cart);
+  const navigate = useNavigate();
 
   // Increase Quantity
   const increaseQuantityHandler = (id, quantity, stock) => {
@@ -20,6 +23,10 @@ const Cart = () => {
     dispatch(addItemsToCart(id, newQty));
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   //Decrease Quantity
   const decreaseQuantityHandler = (id, quantity) => {
     const newQty = quantity - 1;
@@ -29,8 +36,13 @@ const Cart = () => {
     dispatch(addItemsToCart(id, newQty));
   };
 
+  //remove item from cart
   const deleteItemFromCart = (id) => {
     dispatch(removeItemFromCart(id));
+  };
+
+  const checkOutHandler = () => {
+    navigate("/login?redirect=shipping");
   };
 
   return (
@@ -177,7 +189,12 @@ const Cart = () => {
                   )}`}</Text>
                 </Box>
                 <Box width="40%" margin="0 auto" mt={10}>
-                  <Button width="100%" borderRadius="20px" colorScheme="orange">
+                  <Button
+                    width="100%"
+                    borderRadius="20px"
+                    colorScheme="orange"
+                    onClick={checkOutHandler}
+                  >
                     Check Out
                   </Button>
                 </Box>

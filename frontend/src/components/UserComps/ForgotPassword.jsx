@@ -26,6 +26,9 @@ const ForgotPassword = () => {
     (state) => state.PasswordReducer
   );
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const resetPasswordHandler = () => {
     if (!email) {
       toast({

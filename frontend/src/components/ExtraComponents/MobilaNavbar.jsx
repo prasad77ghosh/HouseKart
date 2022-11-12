@@ -25,12 +25,32 @@ import UserOptions from "./UserOptions";
 const MobilaNavbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isAuthenticated, user } = useSelector((state) => state.AuthReducer);
+    const { CartItems } = useSelector((state) => state.Cart);
   return (
     <>
       <Box display="flex" alignItems="center" gap={3}>
         <Box>
-          <Link to = "/cart">
-            <FaShoppingBag size={22} />
+          <Link to="/cart">
+            <Box position="relative">
+              {CartItems.length >= 1 && (
+                <>
+                  <Box
+                    bg="red"
+                    fontWeight="medium"
+                    textAlign="center"
+                    borderRadius="full"
+                    position="absolute"
+                    padding={1}
+                    left="15px"
+                    bottom="10px"
+                    height="21px"
+                  >
+                    <Text fontSize="12px">{CartItems.length}</Text>
+                  </Box>
+                </>
+              )}
+              <FaShoppingBag size={22} />
+            </Box>
           </Link>
         </Box>
         <Box mt="1px">

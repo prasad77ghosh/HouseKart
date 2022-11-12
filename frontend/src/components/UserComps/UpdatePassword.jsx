@@ -46,6 +46,11 @@ const UpdatePassword = () => {
     dispatch(passwordUpdate(oldPassword, newPassword, confirmPassword));
   };
 
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
+
   useEffect(() => {
     if (error) {
       toast({

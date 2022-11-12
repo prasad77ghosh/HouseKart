@@ -26,6 +26,10 @@ const Products = () => {
     setCurrentPage(e);
   };
 
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
+
   // let count = filteredProductCount;
 
   //API call

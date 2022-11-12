@@ -113,4 +113,9 @@
   border-radius: 10px;
 }
 
-
+.ft {
+  font-weight: 600;
+  color: greenyellow;
+  font-size: 17px;
+  margin-right: 10px;
+}
