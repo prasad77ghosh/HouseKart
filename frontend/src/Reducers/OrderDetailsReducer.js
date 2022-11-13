@@ -5,25 +5,23 @@ const initialState = {
   order: {},
   error: null,
 };
-
-const OrderReducer = createReducer(initialState, {
-  createOrderRequest: (state) => {
+const OrderDetailsReducer = createReducer(initialState, {
+  orderDetailsRequest: (state) => {
     state.loading = true;
   },
 
-  createOrderSuccess: (state, action) => {
+  orderDetailsSuccess: (state, action) => {
     state.loading = false;
     state.order = action.payload;
   },
 
-  createOrderFail: (state, action) => {
+  orderDetailsFail: (state, action) => {
     state.loading = false;
     state.error = action.payload;
   },
-
   clearError: (state) => {
     state.error = null;
   },
 });
 
-export default OrderReducer;
+export default OrderDetailsReducer;

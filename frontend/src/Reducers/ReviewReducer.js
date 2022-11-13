@@ -2,28 +2,22 @@ import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
   loading: false,
-  order: {},
   error: null,
 };
 
-const OrderReducer = createReducer(initialState, {
-  createOrderRequest: (state) => {
+const ReviewReducer = createReducer(initialState, {
+  reviewSubmitRequest: (state) => {
     state.loading = true;
   },
-
-  createOrderSuccess: (state, action) => {
+  reviewSubmitSuccess: (state, action) => {
     state.loading = false;
-    state.order = action.payload;
+    state.success = action.payload;
   },
-
-  createOrderFail: (state, action) => {
+  reviewSubmitFail: (state, action) => {
     state.loading = false;
     state.error = action.payload;
   },
-
   clearError: (state) => {
     state.error = null;
   },
 });
-
-export default OrderReducer;

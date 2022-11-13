@@ -8,6 +8,7 @@ import PasswordReducer from "./Reducers/PasswordReducer";
 import CartReducer from "./Reducers/CartReducer";
 import OrderReducer from "./Reducers/OrderReducer";
 import MyOrderReducer from "./Reducers/MyOrderReducer";
+import OrderDetailsReducer from "./Reducers/OrderDetailsReducer";
 
 const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ const store = configureStore({
     Cart: CartReducer,
     OrderReducer,
     MyOrderReducer,
+    OrderDetailsReducer,
   },
 });
 

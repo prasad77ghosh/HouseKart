@@ -124,140 +124,136 @@ const ProductDetails = () => {
       ) : (
         product && (
           <>
-              <Box bg="purple.900" minH="70vh">
+            <Box bg="purple.900" minH="70vh">
+              <Box
+                width={{ base: "70%", md: "80%" }}
+                margin="0 auto"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                flexDirection={{ base: "column", md: "row" }}
+                gap={{ base: "10", md: "20" }}
+                color="gray.100"
+                mt="2rem"
+                mb="2rem"
+                borderRadius="20px"
+              >
+                <Box>
+                  <Slider {...settings} className="carosel-slider">
+                    {product.images &&
+                      product.images.map((item, i) => (
+                        <Image
+                          className="carosel-img"
+                          key={item.url}
+                          src={item.url}
+                          alt={`${i} Slide`}
+                          width={{ base: "40%", md: "100%" }}
+                          height={{ base: "250px", md: "500px" }}
+                          objectFit="contain"
+                          p={2}
+                        />
+                      ))}
+                  </Slider>
+                </Box>
                 <Box
-                  width={{ base: "70%", md: "80%" }}
-                  margin="0 auto"
                   display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  flexDirection={{ base: "column", md: "row" }}
-                  gap={{ base: "10", md: "20" }}
-                  color="gray.100"
-                  mt="2rem"
-                  mb="2rem"
-                  borderRadius="20px"
+                  flexDirection="column"
+                  gap={{ base: "4", md: "6" }}
                 >
                   <Box>
-                    <Slider {...settings} className="carosel-slider">
-                      {product.images &&
-                        product.images.map((item, i) => (
-                          <Image
-                            className="carosel-img"
-                            key={item.url}
-                            src={item.url}
-                            alt={`${i} Slide`}
-                            width={{ base: "40%", md: "100%" }}
-                            height={{ base: "250px", md: "500px" }}
-                            objectFit="contain"
-                            p={2}
-                          />
-                        ))}
-                    </Slider>
-                  </Box>
-                  <Box
-                    display="flex"
-                    flexDirection="column"
-                    gap={{ base: "4", md: "6" }}
-                  >
-                    <Box>
-                      <Text fontSize="2xl" fontWeight="medium">
-                        {product.name}
-                      </Text>
-                      <Text fontSize="xs">Product :- #{product._id}</Text>
-                    </Box>
-                    <Box display="flex" alignItems="center" gap={3}>
-                      <ReactStars {...options} />
-                      <Text>({product.numOfReviews} Reviews)</Text>
-                    </Box>
-
-                    <Box>
-                      <Text
-                        fontSize="xl"
-                        fontWeight="medium"
-                      >{`Price :- ₹${product.price}`}</Text>
-                      <Box display="flex" alignItems="center" gap={2} mt={2}>
-                        <Button colorScheme="purple" onClick={decreaseQuantity}>
-                          <Text fontSize="3xl" mb={1}>
-                            -
-                          </Text>
-                        </Button>
-                        <Input
-                          value={quantity}
-                          type="number"
-                          width="55px"
-                          textAlign="center"
-                          readOnly
-                        />
-                        <Button colorScheme="purple" onClick={increaseQuantity}>
-                          <Text fontSize="2xl" mb={1}>
-                            +
-                          </Text>
-                        </Button>
-                      </Box>
-                    </Box>
-
-                    <Box
-                      fontSize="xl"
-                      display="flex"
-                      alignItems="center"
-                      gap={3}
-                    >
-                      <Button
-                        colorScheme={"orange"}
-                        size="sm"
-                        borderRadius="15px"
-                        onClick={addToCartHandler}
-                      >
-                        Add To Cart
-                      </Button>
-                      <Text color={product.Stock < 1 ? "red" : "greenyellow"}>
-                        {product.Stock < 1 ? "OutOfStock" : "InStock"}
-                      </Text>
-                    </Box>
-
-                    <Box>
-                      <Text fontSize="xl" fontWeight="medium">
-                        Description :
-                      </Text>
-                      <Text>{product.description}</Text>
-                    </Box>
-                    <Button colorScheme="orange">Submit Review</Button>
-                  </Box>
-                </Box>
-              </Box>
-
-              <Box>
-                <Box>
-                  {product.reviews && product.reviews[0] ? (
-                    <>
-                      <Box
-                        borderBottom="2px solid tomato"
-                        width={{ base: "50%", md: "10%" }}
-                        margin="0 auto"
-                      >
-                        <Text
-                          textAlign="center"
-                          fontSize="xl"
-                          fontWeight="bold"
-                          mt={5}
-                        >
-                          REVIEWS
-                        </Text>
-                      </Box>
-                      <Box display="flex" flexDirection="column" mt={5}>
-                        {product.reviews.map((review) => (
-                          <ReviewCard key={review._id} review={review} />
-                        ))}
-                      </Box>
-                    </>
-                  ) : (
-                    <Text textAlign="center" fontWeight="bold" m={3}>
-                      No Reviews Yet
+                    <Text fontSize="2xl" fontWeight="medium">
+                      {product.name}
                     </Text>
-                  )}
+                    <Text fontSize="xs">Product :- #{product._id}</Text>
+                  </Box>
+                  <Box display="flex" alignItems="center" gap={3}>
+                    <ReactStars {...options} />
+                    <Text>({product.numOfReviews} Reviews)</Text>
+                  </Box>
+
+                  <Box>
+                    <Text
+                      fontSize="xl"
+                      fontWeight="medium"
+                    >{`Price :- ₹${product.price}`}</Text>
+                    <Box display="flex" alignItems="center" gap={2} mt={2}>
+                      <Button colorScheme="purple" onClick={decreaseQuantity}>
+                        <Text fontSize="3xl" mb={1}>
+                          -
+                        </Text>
+                      </Button>
+                      <Input
+                        value={quantity}
+                        type="number"
+                        width="55px"
+                        textAlign="center"
+                        readOnly
+                      />
+                      <Button colorScheme="purple" onClick={increaseQuantity}>
+                        <Text fontSize="2xl" mb={1}>
+                          +
+                        </Text>
+                      </Button>
+                    </Box>
+                  </Box>
+
+                  <Box fontSize="xl" display="flex" alignItems="center" gap={3}>
+                    <Button
+                      colorScheme={"orange"}
+                      isDisabled={product.Stock < 1 ? true : false}
+                      size="sm"
+                      borderRadius="15px"
+                      onClick={addToCartHandler}
+                    >
+                      Add To Cart
+                    </Button>
+                    <Text color={product.Stock < 1 ? "red" : "greenyellow"}>
+                      {product.Stock < 1 ? "OutOfStock" : "InStock"}
+                    </Text>
+                  </Box>
+
+                  <Box>
+                    <Text fontSize="xl" fontWeight="medium">
+                      Description :
+                    </Text>
+                    <Text>{product.description}</Text>
+                  </Box>
+                  <Button colorScheme="orange">Submit Review</Button>
                 </Box>
               </Box>
+            </Box>
+
+            <Box>
+              <Box>
+                {product.reviews && product.reviews[0] ? (
+                  <>
+                    <Box
+                      borderBottom="2px solid tomato"
+                      width={{ base: "50%", md: "10%" }}
+                      margin="0 auto"
+                    >
+                      <Text
+                        textAlign="center"
+                        fontSize="xl"
+                        fontWeight="bold"
+                        mt={5}
+                      >
+                        REVIEWS
+                      </Text>
+                    </Box>
+                    <Box display="flex" flexDirection="column" mt={5}>
+                      {product.reviews.map((review) => (
+                        <ReviewCard key={review._id} review={review} />
+                      ))}
+                    </Box>
+                  </>
+                ) : (
+                  <Text textAlign="center" fontWeight="bold" m={3}>
+                    No Reviews Yet
+                  </Text>
+                )}
+              </Box>
+            </Box>
           </>
         )
       )}

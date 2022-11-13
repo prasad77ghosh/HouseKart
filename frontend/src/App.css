@@ -10,11 +10,11 @@
 }
 
 .greenColor {
-  color: greenyellow;
+  color: greenyellow !important;
 }
 
 .redColor {
-  color: red;
+  color: red !important;
 }
 
 /* paginaation Box */

@@ -83,3 +83,28 @@ export const productDetails = (id) => async (dispatch) => {
     });
   }
 };
+
+// submit review
+export const submitReview = (reviewData) => async (dispatch) => {
+  const url = "/review";
+  try {
+    dispatch({
+      type: "reviewSubmitRequest",
+    });
+    const { data } = await http.put(url, reviewData);
+    dispatch({
+      type: "reviewSubmitSuccess",
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: "reviewSubmitFail",
+      payload:
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString(),
+    });
+  }
+};

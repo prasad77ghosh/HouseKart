@@ -49,3 +49,30 @@ export const myOrders = () => async (dispatch) => {
     });
   }
 };
+
+//order Details
+export const detailsOfOrder = (id) => async (dispatch) => {
+  const url = `/order/${id}`;
+  try {
+    dispatch({
+      type: "orderDetailsRequest",
+    });
+
+    const { data } = await http.get(url);
+    console.log(data)
+    dispatch({
+      type: "orderDetailsSuccess",
+      payload: data.order,
+    });
+  } catch (error) {
+    dispatch({
+      type: "orderDetailsFail",
+      payload:
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString(),
+    });
+  }
+};

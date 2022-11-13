@@ -28,6 +28,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import OrderSeccess from "./Components/OrderComps/OrderSeccess";
 import Footer from "./Components/Footer";
 import MyOrder from "./Components/OrderComps/MyOrder";
+import OrderDetails from "./Components/OrderComps/OrderDetails";
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
 
@@ -82,6 +83,7 @@ function App() {
               />
               <Route path="success" element={<OrderSeccess />} />
               <Route path="orders/me" element={<MyOrder />} />
+              <Route path="order/:id" element={<OrderDetails />} />
             </Route>
           </Routes>
           <Footer />
