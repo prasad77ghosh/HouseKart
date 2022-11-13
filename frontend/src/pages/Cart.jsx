@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 const Cart = () => {
   const dispatch = useDispatch();
   const { CartItems } = useSelector((state) => state.Cart);
+  const { isAuthenticated } = useSelector((state) => state.AuthReducer);
   const navigate = useNavigate();
 
   // Increase Quantity
@@ -42,7 +43,11 @@ const Cart = () => {
   };
 
   const checkOutHandler = () => {
-    navigate("/login?redirect=shipping");
+   if(isAuthenticated){
+    navigate("/shipping")
+   }else{
+    navigate("/login")
+   }
   };
 
   return (
@@ -55,7 +60,7 @@ const Cart = () => {
             flexDirection="column"
             gap={3}
             justifyContent="center"
-            height="100vh"
+            minH="100vh"
           >
             <MdRemoveShoppingCart size={50} color="#322659" />
             <Text fontSize={{ base: "2xl", md: "3xl" }} fontWeight="medium">
@@ -68,11 +73,7 @@ const Cart = () => {
         </>
       ) : (
         <>
-          <Box
-            width={{ base: "95%", md: "90%" }}
-            margin="1rem auto"
-            height="100vh"
-          >
+          <Box width={{ base: "95%", md: "90%" }} margin="1rem auto" mb="3rem" minH="100vh">
             <Box
               display="flex"
               alignItems="center"

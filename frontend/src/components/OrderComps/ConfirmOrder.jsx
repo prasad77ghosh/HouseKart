@@ -83,7 +83,7 @@ const ConfirmOrder = () => {
               borderRadius="10px"
               bg="purple.800"
               mt={4}
-              height="400px"
+              height="500px"
               overflowY="scroll"
             >
               <Box borderBottom="2px solid tomato" width="fit-content" p={2}>

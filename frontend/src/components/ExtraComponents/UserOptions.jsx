@@ -38,6 +38,10 @@ const UserOptions = ({ user }) => {
     navigate("/account");
   };
 
+  const navigateToMyOrders = () => {
+    navigate("/orders/me");
+  };
+
   return (
     <>
       <Popover>
@@ -77,7 +81,7 @@ const UserOptions = ({ user }) => {
                 </Box>
               </Tooltip>
               <Tooltip label="Orders" hasArrow>
-                <Box>
+                <Box onClick={navigateToMyOrders}>
                   <RiShoppingBasketLine size={25} />
                 </Box>
               </Tooltip>

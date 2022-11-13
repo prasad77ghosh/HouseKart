@@ -1,7 +1,7 @@
 import React from "react";
 import { useSteps } from "chakra-ui-steps";
 import { useRef } from "react";
-import { Text, useToast } from "@chakra-ui/react";
+import { Text, useToast, Box } from "@chakra-ui/react";
 import CheckOutStep from "../ExtraComponents/CheckOutStep";
 import { BsCreditCard } from "react-icons/bs";
 import { MdOutlineVpnKey } from "react-icons/md";
@@ -17,6 +17,8 @@ import {
 import http from "../../http";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { orderCreation } from "../../Actions/Order";
 
 const Payment = () => {
   const orderInfo = JSON.parse(sessionStorage.getItem("order_info"));
@@ -25,11 +27,23 @@ const Payment = () => {
   });
   const { ShippingInfo, CartItems } = useSelector((state) => state.Cart);
   const { user } = useSelector((state) => state.AuthReducer);
+  const { data, error } = useSelector((state) => state.OrderReducer);
   const toast = useToast();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const payBtn = useRef(null);
   const stripe = useStripe();
   const elements = useElements();
+
+  console.log(data);
+  const order = {
+    shippingInfo: ShippingInfo,
+    orderItems: CartItems,
+    itemsPrice: orderInfo.subtotal,
+    taxPrice: orderInfo.tax,
+    shippingPrice: orderInfo.shippingCharges,
+    totalPrice: orderInfo.totalPrice,
+  };
 
   const paymentData = {
     amount: Math.round(orderInfo.totalPrice * 100),
@@ -71,6 +85,12 @@ const Payment = () => {
         });
       } else {
         if (result.paymentIntent.status === "succeeded") {
+          order.paymentInfo = {
+            id: result.paymentIntent.id,
+            status: result.paymentIntent.status,
+          };
+          dispatch(orderCreation(order));
+          nextStep();
           navigate("/success");
         } else {
           toast({
@@ -81,34 +101,59 @@ const Payment = () => {
           });
         }
       }
-    } catch (error) {}
+    } catch (error) {
+      payBtn.current.disabled = false;
+      toast({
+        title: error.response.data.message,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
+
+  useEffect(() => {
+    if (error) {
+      toast({
+        title: error,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+
+      dispatch({
+        type: "clearError",
+      });
+    }
+  }, [dispatch, toast]);
   return (
     <>
-      <CheckOutStep activeStep={activeStep} />
-      <div className="paymentContainer">
-        <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
-          <Text color="white">Card Info</Text>
-          <div>
-            <BsCreditCard />
-            <CardNumberElement className="paymentInput" />
-          </div>
-          <div>
-            <BsCalendarEvent />
-            <CardExpiryElement className="paymentInput" />
-          </div>
-          <div>
-            <MdOutlineVpnKey />
-            <CardCvcElement className="paymentInput" />
-          </div>
+      <div style={{ minHeight: "100vh" }}>
+        <CheckOutStep activeStep={activeStep} />
+        <div className="paymentContainer">
+          <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
+            <Text color="white">Card Info</Text>
+            <div>
+              <BsCreditCard />
+              <CardNumberElement className="paymentInput" />
+            </div>
+            <div>
+              <BsCalendarEvent />
+              <CardExpiryElement className="paymentInput" />
+            </div>
+            <div>
+              <MdOutlineVpnKey />
+              <CardCvcElement className="paymentInput" />
+            </div>
 
-          <input
-            type="submit"
-            value={`Pay - ₹${orderInfo && orderInfo.totalPrice}`}
-            ref={payBtn}
-            className="paymentFormBtn"
-          />
-        </form>
+            <input
+              type="submit"
+              value={`Pay - ₹${orderInfo && orderInfo.totalPrice}`}
+              ref={payBtn}
+              className="paymentFormBtn"
+            />
+          </form>
+        </div>
       </div>
     </>
   );

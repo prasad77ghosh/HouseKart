@@ -19,14 +19,13 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { userLogin } from "../../Actions/Auth";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const toast = useToast();
-  const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, isAuthenticated, error } = useSelector(
@@ -49,9 +48,6 @@ const Login = () => {
     }
     dispatch(userLogin(email, password));
   };
-
-  const redirect = searchParams ? "/shipping" : "/account";
-  console.log(redirect);
   useEffect(() => {
     if (error) {
       toast({
@@ -67,7 +63,7 @@ const Login = () => {
     }
 
     if (isAuthenticated) {
-      navigate(redirect);
+      navigate("/account");
     }
   }, [dispatch, error, toast, isAuthenticated, navigate, redirect]);
 

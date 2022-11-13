@@ -6,7 +6,7 @@ const ProtrctedRoute = () => {
   const { loading, user, isAuthenticated } = useSelector(
     (state) => state.AuthReducer
   );
-  if (!isAuthenticated) {
+  if (isAuthenticated === false) {
     return <Navigate to={"/login"} />;
   }
   return <>{!loading && <Outlet />}</>;

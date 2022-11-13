@@ -7,9 +7,9 @@ const UserInfo = () => {
   const { user, isAuthenticated } = useSelector((state) => state.AuthReducer);
   const navigate = useNavigate();
 
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -23,10 +23,11 @@ const UserInfo = () => {
           fontSize={{ base: "xl", md: "2xl" }}
           fontWeight="bold"
           textAlign="center"
-          mt={10}
+          mt={4}
         >
           My Profile
         </Text>
+
         <Box
           display="flex"
           width={{ base: "80%", md: "80%", lg: "60%" }}

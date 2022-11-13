@@ -26,9 +26,9 @@ const Products = () => {
     setCurrentPage(e);
   };
 
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // let count = filteredProductCount;
 
@@ -62,7 +62,7 @@ const Products = () => {
           category={category}
           setCategory={setCategory}
           ratings={ratings}
-          setRatings = {setRatings}
+          setRatings={setRatings}
         />
         <Box
           textAlign="center"
