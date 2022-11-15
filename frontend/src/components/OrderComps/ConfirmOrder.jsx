@@ -1,7 +1,7 @@
 import { Text, Box, Image, Button } from "@chakra-ui/react";
 import React from "react";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import CheckOutStep from "../ExtraComponents/CheckOutStep";
 import { useSteps } from "chakra-ui-steps";
 import { Link } from "react-router-dom";

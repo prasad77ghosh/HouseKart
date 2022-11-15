@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./myOrders.css";
 import { DataGrid } from "@material-ui/data-grid";
-import { Box, Spinner, Text, useToast } from "@chakra-ui/react";
+import { Box, Spinner, useToast } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { myOrders } from "../../Actions/Order";
 import { MdLaunch } from "react-icons/md";
@@ -37,7 +37,7 @@ const MyOrder = () => {
 
       return;
     }
-  }, [dispatch, toast]);
+  }, [dispatch, toast, error]);
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },

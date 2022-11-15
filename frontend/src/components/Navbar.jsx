@@ -7,9 +7,21 @@ import { BsPersonCircle } from "react-icons/bs";
 import MobilaNavbar from "./ExtraComponents/MobilaNavbar";
 import UserOptions from "./ExtraComponents/UserOptions";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 const Navbar = () => {
   const { isAuthenticated, user } = useSelector((state) => state.AuthReducer);
   const { CartItems } = useSelector((state) => state.Cart);
+  const { pathname } = useLocation();
+  if (
+    pathname === "/admin/dashboard" ||
+    pathname === "/admin/products" ||
+    pathname === "/admin/users" ||
+    pathname === "/admin/reviews" ||
+    pathname === "/admin/product" ||
+    pathname === "/admin/orders"
+  )
+    return null;
+
   return (
     <>
       <Box
@@ -58,7 +70,7 @@ const Navbar = () => {
                 <Text fontWeight="medium">About</Text>
               </Link>
               {user && user.role === "admin" ? (
-                <Link to="/dashbaord">
+                <Link to="admin/dashboard">
                   <Text fontWeight="medium">Dashboard</Text>
                 </Link>
               ) : (

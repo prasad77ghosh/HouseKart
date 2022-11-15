@@ -1,18 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { BsFilter } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
 import {
   Box,
   Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
   Text,
-  Button,
   Tooltip,
   FormControl,
   Input,
@@ -27,7 +24,6 @@ import {
   SliderTrack,
   SliderFilledTrack,
   SliderThumb,
-  SliderMark,
 } from "@chakra-ui/react";
 
 const categories = [

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSteps } from "chakra-ui-steps";
 import { useRef } from "react";
-import { Text, useToast, Box } from "@chakra-ui/react";
+import { Text, useToast } from "@chakra-ui/react";
 import CheckOutStep from "../ExtraComponents/CheckOutStep";
 import { BsCreditCard } from "react-icons/bs";
 import { MdOutlineVpnKey } from "react-icons/md";
@@ -125,10 +125,10 @@ const Payment = () => {
         type: "clearError",
       });
     }
-  }, [dispatch, toast]);
+  }, [dispatch, toast, error]);
   return (
     <>
-      <div style={{ minHeight: "100vh" }}>
+      <div>
         <CheckOutStep activeStep={activeStep} />
         <div className="paymentContainer">
           <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>

@@ -18,7 +18,7 @@ const UserInfo = () => {
   }, [navigate, isAuthenticated]);
   return (
     <>
-      <Box height="100vh" bg="purple.900" color="gray.50">
+      <Box bg="purple.900" color="gray.50" height="100vh">
         <Text
           fontSize={{ base: "xl", md: "2xl" }}
           fontWeight="bold"

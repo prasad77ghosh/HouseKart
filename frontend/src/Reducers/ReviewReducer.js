@@ -2,6 +2,7 @@ import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
   loading: false,
+  success: false,
   error: null,
 };
 
@@ -17,7 +18,13 @@ const ReviewReducer = createReducer(initialState, {
     state.loading = false;
     state.error = action.payload;
   },
+
+  reviewSubmitReset: (state, action) => {
+    state.success = false;
+  },
   clearError: (state) => {
     state.error = null;
   },
 });
+
+export default ReviewReducer;

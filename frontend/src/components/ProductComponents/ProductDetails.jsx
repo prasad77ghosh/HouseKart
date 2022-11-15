@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { productDetails } from "../../Actions/Products";
 import Slider from "react-slick";
-import ReactStars from "react-rating-stars-component";
+import { Rating } from "@material-ui/lab";
+import ReviewSubmit from "../ExtraComponents/ReviewSubmit";
 import {
   Box,
   Image,
@@ -75,12 +76,10 @@ const ProductDetails = () => {
 
   //React Star
   const options = {
-    edit: false,
-    color: "lightgray",
-    activeColor: "tomato",
-    size: window.innerWidth < 600 ? 20 : 25,
+    size: "large",
     value: product.ratings,
-    isHalf: true,
+    readOnly: true,
+    precision: 0.5,
   };
 
   // Slider Options
@@ -167,7 +166,7 @@ const ProductDetails = () => {
                     <Text fontSize="xs">Product :- #{product._id}</Text>
                   </Box>
                   <Box display="flex" alignItems="center" gap={3}>
-                    <ReactStars {...options} />
+                    <Rating {...options} />
                     <Text>({product.numOfReviews} Reviews)</Text>
                   </Box>
 
@@ -175,8 +174,8 @@ const ProductDetails = () => {
                     <Text
                       fontSize="xl"
                       fontWeight="medium"
-                    >{`Price :- ₹${product.price}`}</Text>
-                    <Box display="flex" alignItems="center" gap={2} mt={2}>
+                    >{`Price :  ₹ ${product.price}`}</Text>
+                    <Box display="flex" alignItems="center" gap={2} mt={5}>
                       <Button colorScheme="purple" onClick={decreaseQuantity}>
                         <Text fontSize="3xl" mb={1}>
                           -
@@ -218,7 +217,7 @@ const ProductDetails = () => {
                     </Text>
                     <Text>{product.description}</Text>
                   </Box>
-                  <Button colorScheme="orange">Submit Review</Button>
+                  <ReviewSubmit />
                 </Box>
               </Box>
             </Box>

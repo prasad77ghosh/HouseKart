@@ -14,10 +14,31 @@ import Playtore from "../img/playstore.png";
 import { BsInstagram } from "react-icons/bs";
 import { BsYoutube } from "react-icons/bs";
 import { BsFacebook } from "react-icons/bs";
+import { useLocation } from "react-router-dom";
 
 const Footer = () => {
+  const { pathname } = useLocation();
+  if (
+    pathname === "/admin/dashboard" ||
+    pathname === "/login" ||
+    pathname === "/register" ||
+    pathname === "/cart" ||
+    pathname === "/shipping" ||
+    pathname === "/order/confirm" ||
+    pathname === "/process/payment" ||
+    pathname === "/orders/me" ||
+    pathname === "/account" ||
+    pathname === "/me/update" ||
+    pathname === "/password/update" ||
+    pathname === "/admin/products" ||
+    pathname === "/admin/users" ||
+    pathname === "/admin/reviews" ||
+    pathname === "/admin/product" ||
+    pathname === "/admin/orders" 
+  )
+    return null;
   return (
-    <Box width="100%" bg="purple.800" p={4} mt="auto" color = "gray.100">
+    <Box width="100%" bg="purple.800" p={4} mt="auto" color="gray.100">
       <Container
         maxW={{ base: "100%", md: "100%", lg: "70%" }}
         textAlign="center"

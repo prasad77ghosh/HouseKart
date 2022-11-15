@@ -9,6 +9,7 @@ import CartReducer from "./Reducers/CartReducer";
 import OrderReducer from "./Reducers/OrderReducer";
 import MyOrderReducer from "./Reducers/MyOrderReducer";
 import OrderDetailsReducer from "./Reducers/OrderDetailsReducer";
+import ReviewReducer from "./Reducers/ReviewReducer";
 
 const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ const store = configureStore({
     OrderReducer,
     MyOrderReducer,
     OrderDetailsReducer,
+    ReviewReducer,
   },
 });
 

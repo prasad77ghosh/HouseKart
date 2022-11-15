@@ -21,11 +21,14 @@ import { BsPersonCircle } from "react-icons/bs";
 import Kart from "../../img/kart.png";
 import { useSelector } from "react-redux";
 import UserOptions from "./UserOptions";
+import { useLocation } from "react-router-dom";
 
 const MobilaNavbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isAuthenticated, user } = useSelector((state) => state.AuthReducer);
-    const { CartItems } = useSelector((state) => state.Cart);
+  const { CartItems } = useSelector((state) => state.Cart);
+  const { pathname } = useLocation();
+  if (pathname === "/admin/dashboard") return null;
   return (
     <>
       <Box display="flex" alignItems="center" gap={3}>
@@ -117,7 +120,7 @@ const MobilaNavbar = () => {
               </Link>
 
               {user && user.role === "admin" ? (
-                <Link to="/dashboard">
+                <Link to="/admin/dashboard">
                   <ListItem mt={2} onClick={onClose}>
                     <Text fontWeight="medium" fontSize="20px">
                       Dashboard

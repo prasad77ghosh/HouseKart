@@ -96,7 +96,7 @@ const UpdateProfile = () => {
   }, [dispatch, error, isUpdated, toast, navigate]);
   return (
     <>
-      <Box p={2} height="100vh">
+      <Box p={2}>
         <Box
           width={{ base: "xs", md: "lg" }}
           margin="2rem auto"

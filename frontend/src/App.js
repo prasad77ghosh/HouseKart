@@ -29,9 +29,11 @@ import OrderSeccess from "./Components/OrderComps/OrderSeccess";
 import Footer from "./Components/Footer";
 import MyOrder from "./Components/OrderComps/MyOrder";
 import OrderDetails from "./Components/OrderComps/OrderDetails";
+import DashBoard from "./Admin/DashBoard";
+import AdminProtected from "./ProtectedRoutes/AdminProtected";
+import AdProducts from "./Admin/AdProducts";
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
-
   async function getStripeApiKey() {
     const { data } = await http.get("/stripeapikey");
     setStripeApiKey(data.stripeApiKey);
@@ -84,6 +86,11 @@ function App() {
               <Route path="success" element={<OrderSeccess />} />
               <Route path="orders/me" element={<MyOrder />} />
               <Route path="order/:id" element={<OrderDetails />} />
+            </Route>
+
+            <Route isAdmin={true} element={<AdminProtected />}>
+              <Route path="admin/dashboard" element={<DashBoard />} />
+              <Route path="admin/products" element={<AdProducts />} />
             </Route>
           </Routes>
           <Footer />

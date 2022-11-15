@@ -14,7 +14,7 @@ import React from "react";
 import { MdOutlineEmail } from "react-icons/md";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -65,11 +65,11 @@ const Login = () => {
     if (isAuthenticated) {
       navigate("/account");
     }
-  }, [dispatch, error, toast, isAuthenticated, navigate, redirect]);
+  }, [dispatch, error, toast, isAuthenticated, navigate]);
 
   return (
     <>
-      <Box p={2} height="100vh">
+      <Box p={2}>
         <Box
           width={{ base: "xs", md: "lg" }}
           margin="4rem auto"

@@ -1,9 +1,9 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import {Flex, Text } from "@chakra-ui/react";
 import React from "react";
 import { MdLocalShipping } from "react-icons/md";
 import { MdLibraryAddCheck } from "react-icons/md";
 import { MdOutlineAccountBalance } from "react-icons/md";
-import { Step, Steps, useSteps } from "chakra-ui-steps";
+import { Step, Steps } from "chakra-ui-steps";
 
 const CheckOutStep = ({ activeStep }) => {
   const steps = [
