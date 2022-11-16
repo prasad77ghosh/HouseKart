@@ -10,6 +10,7 @@ import OrderReducer from "./Reducers/OrderReducer";
 import MyOrderReducer from "./Reducers/MyOrderReducer";
 import OrderDetailsReducer from "./Reducers/OrderDetailsReducer";
 import ReviewReducer from "./Reducers/ReviewReducer";
+import createNewProduct from "./Reducers/admin/NewProductReducer";
 
 const store = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ const store = configureStore({
     MyOrderReducer,
     OrderDetailsReducer,
     ReviewReducer,
+    createNewProduct,
   },
 });
 

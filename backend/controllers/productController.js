@@ -2,11 +2,36 @@ const Product = require("../models/productModel");
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncError = require("../middlewares/catchAsyncError");
 const ApiFeatures = require("../utils/ApiFeatures");
+const cloudinary = require("cloudinary");
 
 //---------------- THIS IS COMPLETE CRUD OPERATION -------------------//
 
 // create poruduct ---> Admin
 exports.createProduct = catchAsyncError(async (req, res, next) => {
+  let images = [];
+
+  if (typeof req.body.images === "string") {
+    images.push(req.body.images);
+  } else {
+    images = req.body.images;
+  }
+
+  const imagesLinks = [];
+
+  for (let i = 0; i < images.length; i++) {
+    const result = await cloudinary.v2.uploader.upload(images[i], {
+      folder: "HouseKart",
+    });
+
+    imagesLinks.push({
+      public_id: result.public_id,
+      url: result.secure_url,
+    });
+  }
+
+  req.body.images = imagesLinks;
+  req.body.user = req.user.id;
+
   // here user is from authUser and authUser use loginUser and loginUser conatin user in its response
   req.body.user = req.user.id;
 

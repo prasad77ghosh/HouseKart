@@ -108,3 +108,29 @@ export const reviewSubmit = (myForm) => async (dispatch) => {
     });
   }
 };
+
+// create new Product
+export const newProductCreation = (myForm) => async (dispatch) => {
+  const url = "/admin/product/new";
+  try {
+    dispatch({
+      type: "newProductRequest",
+    });
+
+    const { data } = await http.post(url, myForm);
+    dispatch({
+      type: "newProductSuccess",
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: "newProductFail",
+      payload:
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString(),
+    });
+  }
+};

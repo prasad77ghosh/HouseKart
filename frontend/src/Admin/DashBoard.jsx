@@ -1,9 +1,30 @@
 import React from "react";
+import { useEffect } from "react";
 import { Box, Text } from "@chakra-ui/react";
 import Sidebar from "./Sidebar";
 import { Chart as ChartJS } from "chart.js/auto";
 import { Line, Doughnut } from "react-chartjs-2";
+import { useSelector, useDispatch } from "react-redux";
+import { allRawProducts } from "../Actions/Products";
 const DashBoard = () => {
+  const dispatch = useDispatch();
+  const { data } = useSelector((state) => state.RawProductsReducer);
+
+  useEffect(() => {
+    dispatch(allRawProducts());
+  }, [dispatch]);
+
+  const { products } = data;
+  console.log(products);
+
+  let outOfStuck = 0;
+  products &&
+    products.forEach((item) => {
+      if (item.Stock === 0) {
+        outOfStuck += 1;
+      }
+    });
+
   const lineState = {
     labels: ["Initial Amount", "Amount Earned"],
     datasets: [
@@ -24,7 +45,7 @@ const DashBoard = () => {
       {
         backgroundColor: ["#00A6B4", "#6800B4"],
         hoverBackgroundColor: ["#4B5000", "#35014F"],
-        data: [2, 10],
+        data: [outOfStuck, products && products.length - outOfStuck],
         borderWidth: 1,
       },
     ],
@@ -59,7 +80,7 @@ const DashBoard = () => {
               <Text fontSize="2xl" fontWeight="medium">
                 Products
               </Text>
-              <Text fontSize="xl">2000</Text>
+              <Text fontSize="xl">{products && products.length}</Text>
             </Box>
             <Box
               bg="#3182CE"
