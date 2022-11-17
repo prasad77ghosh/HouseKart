@@ -15,7 +15,6 @@ const DashBoard = () => {
   }, [dispatch]);
 
   const { products } = data;
-  console.log(products);
 
   let outOfStuck = 0;
   products &&

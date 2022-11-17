@@ -11,6 +11,8 @@ import MyOrderReducer from "./Reducers/MyOrderReducer";
 import OrderDetailsReducer from "./Reducers/OrderDetailsReducer";
 import ReviewReducer from "./Reducers/ReviewReducer";
 import createNewProduct from "./Reducers/admin/NewProductReducer";
+import DeleteProductReducer from "./Reducers/admin/DeleteProductReducer";
+import UpdateProductReducer from "./Reducers/admin/UpdateProductReducer";
 
 const store = configureStore({
   reducer: {
@@ -26,6 +28,8 @@ const store = configureStore({
     OrderDetailsReducer,
     ReviewReducer,
     createNewProduct,
+    DeleteProductReducer,
+    UpdateProductReducer,
   },
 });
 

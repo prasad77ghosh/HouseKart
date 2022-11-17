@@ -70,6 +70,7 @@ const Sidebar = () => {
               <Text fontSize="lg">Create Product</Text>
             </Box>
           </NavLink>
+      
           <NavLink to="/admin/orders">
             <Box
               display="flex"

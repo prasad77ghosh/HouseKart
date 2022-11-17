@@ -15,6 +15,7 @@ import { BsInstagram } from "react-icons/bs";
 import { BsYoutube } from "react-icons/bs";
 import { BsFacebook } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Footer = () => {
   const { pathname } = useLocation();

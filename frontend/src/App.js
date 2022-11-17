@@ -33,6 +33,7 @@ import DashBoard from "./Admin/DashBoard";
 import AdminProtected from "./ProtectedRoutes/AdminProtected";
 import AdProducts from "./Admin/AdProducts";
 import AdNewProduct from "./Admin/AdNewProduct";
+import AdUpdateProduct from "./Admin/AdUpdateProduct";
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
   async function getStripeApiKey() {
@@ -93,6 +94,7 @@ function App() {
               <Route path="admin/dashboard" element={<DashBoard />} />
               <Route path="admin/products" element={<AdProducts />} />
               <Route path="admin/product" element={<AdNewProduct />} />
+              <Route path="admin/product/:id" element={<AdUpdateProduct />} />
             </Route>
           </Routes>
           <Footer />

@@ -1,25 +1,54 @@
 import React, { useEffect } from "react";
-import { Box, Text, useToast,Spinner } from "@chakra-ui/react";
+import { Box, Text, useToast, Spinner } from "@chakra-ui/react";
 import Sidebar from "./Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { allRawProducts } from "../Actions/Products";
+import { deleteProduct } from "../Actions/Products";
 import "./AdProducts.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { MdEdit } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const AdProducts = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const toast = useToast();
   const { loading, data, error } = useSelector(
     (state) => state.RawProductsReducer
   );
+
+  const { success, error: deleteError } = useSelector(
+    (state) => state.DeleteProductReducer
+  );
+  
   const { products } = data;
 
   useEffect(() => {
     dispatch(allRawProducts());
   }, [dispatch]);
+
+  const deleteProductHandler = (id) => {
+    dispatch(deleteProduct(id));
+  };
+
+  useEffect(() => {
+    if (success) {
+      toast({
+        title: "Product Deleted Successfully",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+        position: "bottom",
+      });
+
+      navigate("/admin/dashboard");
+      dispatch({
+        type: "deleteProductReset",
+      });
+    }
+  }, [success, dispatch, toast]);
 
   useEffect(() => {
     if (error) {
@@ -34,7 +63,20 @@ const AdProducts = () => {
         type: "clearError",
       });
     }
-  }, [dispatch, error, toast]);
+
+    if (deleteError) {
+      toast({
+        title: deleteError,
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+        position: "bottom",
+      });
+      dispatch({
+        type: "clearError",
+      });
+    }
+  }, [dispatch, error, toast, deleteError]);
 
   const columns = [
     { field: "id", headerName: "Product ID", minWidth: 200, flex: 0.5 },
@@ -90,6 +132,9 @@ const AdProducts = () => {
               cursor="pointer"
               _hover={{
                 color: "#E53E3E",
+              }}
+              onClick={() => {
+                deleteProductHandler(params.getValue(params.id, "id"));
               }}
             >
               <MdDeleteOutline size={20} />

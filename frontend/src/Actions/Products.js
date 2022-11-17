@@ -134,3 +134,56 @@ export const newProductCreation = (myForm) => async (dispatch) => {
     });
   }
 };
+
+//Delete Product
+export const deleteProduct = (id) => async (dispatch) => {
+  const url = `admin/product/${id}`;
+  try {
+    dispatch({
+      type: "deleteProductRequest",
+    });
+
+    const { data } = await http.delete(url);
+    dispatch({
+      type: "deleteProductSuccess",
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: "deleteProductFail",
+      payload:
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString(),
+    });
+  }
+};
+
+
+// update product action
+export const productUpdate = (id, myFrom) => async (dispatch) => {
+  const url = `admin/product/${id}`;
+  try {
+    dispatch({
+      type: "updateProductRequest",
+    });
+
+    const { data } = await http.put(url, myFrom);
+    dispatch({
+      type: "updateProductSuccess",
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: "updateProductFail",
+      payload:
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString(),
+    });
+  }
+};
