@@ -1,21 +1,63 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Spinner, Text, useToast, Image } from "@chakra-ui/react";
+import {
+  Box,
+  Spinner,
+  Text,
+  useToast,
+  Image,
+  Select,
+  Button,
+  FormControl,
+} from "@chakra-ui/react";
 import { useParams, Link } from "react-router-dom";
-import { detailsOfOrder } from "../../Actions/Order";
 import { useEffect } from "react";
+import { detailsOfOrder } from "../Actions/Order";
+import { updateOrderOfAdmin } from "../Actions/Order";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const OrderDetails = () => {
+const AdUpdateOrder = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const toast = useToast();
+  const [status, setStatus] = useState("");
+  const navigate = useNavigate();
   const { loading, order, error } = useSelector(
     (state) => state.OrderDetailsReducer
   );
+  const {
+    loading: updateLoading,
+    success,
+    error: updateError,
+  } = useSelector((state) => state.AdOrderUpdateReducer);
 
+  console.log(id)
   useEffect(() => {
     dispatch(detailsOfOrder(id));
   }, [dispatch, id]);
+
+  const updateOrderHandler = () => {
+    const myForm = new FormData();
+    myForm.set("status", status);
+    dispatch(updateOrderOfAdmin(id, myForm));
+  };
+
+  useEffect(() => {
+    if (success) {
+      toast({
+        title: `Order ${status} successfully..`,
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+
+      navigate("/admin/orders");
+      dispatch({
+        type: "updateOrderReset",
+      });
+    }
+  }, [dispatch, success, error]);
 
   useEffect(() => {
     if (error) {
@@ -25,8 +67,23 @@ const OrderDetails = () => {
         duration: 3000,
         isClosable: true,
       });
+      dispatch({
+        type: "clearError",
+      });
     }
-  }, [dispatch, toast, error]);
+
+    if (updateError) {
+      toast({
+        title: error,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      dispatch({
+        type: "clearError",
+      });
+    }
+  }, [dispatch, toast, error, updateError]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -176,6 +233,60 @@ const OrderDetails = () => {
                   </Box>
                 </Box>
               </Box>
+
+              <Box
+                width="100%"
+                margin="0 auto"
+                p={5}
+                borderRadius="10px"
+                bg="purple.800"
+                mt={5}
+              >
+                <Box
+                  borderBottom="2px solid tomato"
+                  width="fit-content"
+                  p={2}
+                  margin="0 auto"
+                >
+                  <Text fontSize="2xl" fontWeight="medium">
+                    Process Order
+                  </Text>
+                </Box>
+
+                <Box width="60%" margin="0 auto" mt={5}>
+                  <FormControl isRequired>
+                    <Select
+                      placeholder="Change Order Status"
+                      onChange={(e) => setStatus(e.target.value)}
+                    >
+                      {order.orderStatus === "Processing" && (
+                        <option value="Shipped" className="opt1">
+                          Shipped
+                        </option>
+                      )}
+                      {order.orderStatus === "Shipped" && (
+                        <option value="Delivered" className="opt1">
+                          Delivered
+                        </option>
+                      )}
+                    </Select>
+                  </FormControl>
+
+                  <Box width="50%" margin="15px auto">
+                    <Button
+                      width="100%"
+                      colorScheme="whatsapp"
+                      fontSize="lg"
+                      isDisabled={status === ""}
+                      isLoading={updateLoading}
+                      onClick={updateOrderHandler}
+                    >
+                      Process
+                    </Button>
+                  </Box>
+                </Box>
+              </Box>
+
               <Box
                 width="100%"
                 margin="0 auto"
@@ -201,8 +312,7 @@ const OrderDetails = () => {
                         ? "greenColor"
                         : "redColor"
                     }
-
-                    style = {{fontSize: "20px", fontWeight: "700"}}
+                    style={{ fontSize: "20px", fontWeight: "700" }}
                   >
                     {order.orderStatus && order.orderStatus}
                   </p>
@@ -216,4 +326,4 @@ const OrderDetails = () => {
   );
 };
 
-export default OrderDetails;
+export default AdUpdateOrder;

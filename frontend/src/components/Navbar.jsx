@@ -8,13 +8,10 @@ import MobilaNavbar from "./ExtraComponents/MobilaNavbar";
 import UserOptions from "./ExtraComponents/UserOptions";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { useParams } from "react-router-dom";
 const Navbar = () => {
   const { isAuthenticated, user } = useSelector((state) => state.AuthReducer);
   const { CartItems } = useSelector((state) => state.Cart);
   const { pathname } = useLocation();
-  const { id } = useParams();
-  console.log(id)
   if (
     pathname === "/admin/dashboard" ||
     pathname === "/admin/products" ||

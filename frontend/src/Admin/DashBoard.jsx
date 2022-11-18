@@ -6,12 +6,22 @@ import { Chart as ChartJS } from "chart.js/auto";
 import { Line, Doughnut } from "react-chartjs-2";
 import { useSelector, useDispatch } from "react-redux";
 import { allRawProducts } from "../Actions/Products";
+import { Link } from "react-router-dom";
+import { getAllOrdersOfAdmin } from "../Actions/Order";
 const DashBoard = () => {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.RawProductsReducer);
+  const {
+    loading,
+    data: OrderData,
+    error,
+  } = useSelector((state) => state.AdOrderReducer);
+
+  const { orders } = OrderData;
 
   useEffect(() => {
     dispatch(allRawProducts());
+    dispatch(getAllOrdersOfAdmin());
   }, [dispatch]);
 
   const { products } = data;
@@ -68,32 +78,36 @@ const DashBoard = () => {
             </Text>
           </Box>
           <Box display="flex" justifyContent="space-evenly" mt={7}>
-            <Box
-              bg="#319795"
-              width="250px"
-              minW="fit-content"
-              p={3}
-              borderRadius="10px"
-              textAlign="center"
-            >
-              <Text fontSize="2xl" fontWeight="medium">
-                Products
-              </Text>
-              <Text fontSize="xl">{products && products.length}</Text>
-            </Box>
-            <Box
-              bg="#3182CE"
-              width="250px"
-              minW="fit-content"
-              p={3}
-              borderRadius="10px"
-              textAlign="center"
-            >
-              <Text fontSize="2xl" fontWeight="medium">
-                Orders
-              </Text>
-              <Text fontSize="xl">500</Text>
-            </Box>
+            <Link to="/admin/products">
+              <Box
+                bg="#319795"
+                width="250px"
+                minW="fit-content"
+                p={3}
+                borderRadius="10px"
+                textAlign="center"
+              >
+                <Text fontSize="2xl" fontWeight="medium">
+                  Products
+                </Text>
+                <Text fontSize="xl">{products && products.length}</Text>
+              </Box>
+            </Link>
+            <Link to = "/admin/orders">
+              <Box
+                bg="#3182CE"
+                width="250px"
+                minW="fit-content"
+                p={3}
+                borderRadius="10px"
+                textAlign="center"
+              >
+                <Text fontSize="2xl" fontWeight="medium">
+                  Orders
+                </Text>
+                <Text fontSize="xl">{orders && orders.length}</Text>
+              </Box>
+            </Link>
             <Box
               bg="#00A3C4"
               width="250px"

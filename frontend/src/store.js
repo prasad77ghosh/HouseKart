@@ -13,6 +13,9 @@ import ReviewReducer from "./Reducers/ReviewReducer";
 import createNewProduct from "./Reducers/admin/NewProductReducer";
 import DeleteProductReducer from "./Reducers/admin/DeleteProductReducer";
 import UpdateProductReducer from "./Reducers/admin/UpdateProductReducer";
+import AdOrderReducer from "./Reducers/admin/AdOrderReducer";
+import AdOrderDeleteReducer from "./Reducers/admin/AdOrderDeleteReducer";
+import AdOrderUpdateReducer from "./Reducers/admin/AdOrderUpdate";
 
 const store = configureStore({
   reducer: {
@@ -30,6 +33,9 @@ const store = configureStore({
     createNewProduct,
     DeleteProductReducer,
     UpdateProductReducer,
+    AdOrderReducer,
+    AdOrderDeleteReducer,
+    AdOrderUpdateReducer,
   },
 });
 

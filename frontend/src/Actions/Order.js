@@ -59,7 +59,6 @@ export const detailsOfOrder = (id) => async (dispatch) => {
     });
 
     const { data } = await http.get(url);
-    console.log(data)
     dispatch({
       type: "orderDetailsSuccess",
       payload: data.order,
@@ -67,6 +66,85 @@ export const detailsOfOrder = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "orderDetailsFail",
+      payload:
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString(),
+    });
+  }
+};
+
+//get all orders admin
+export const getAllOrdersOfAdmin = () => async (dispatch) => {
+  const url = "/admin/orders";
+  try {
+    dispatch({
+      type: "getAllOrderRequest",
+    });
+
+    const { data } = await http.get(url);
+    dispatch({
+      type: "getAllOrderSuccess",
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: "getAllOrderFail",
+      payload:
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString(),
+    });
+  }
+};
+
+//delete Order action
+export const deleteOrderOfAdmin = (id) => async (dispatch) => {
+  const url = `/admin/order/${id}`;
+  try {
+    dispatch({
+      type: "deleteOrderRequest",
+    });
+
+    const { data } = await http.delete(url);
+    dispatch({
+      type: "deleteOrderSuccess",
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: "deleteOrderFail",
+      payload:
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString(),
+    });
+  }
+};
+
+//update Order action
+export const updateOrderOfAdmin = (id, myForm) => async (dispatch) => {
+  const url = `/admin/order/${id}`;
+  try {
+    dispatch({
+      type: "updateOrderRequest",
+    });
+
+    const { data } = await http.put(url, myForm);
+    console.log(data)
+    dispatch({
+      type: "updateOrderSuccess",
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: "updateOrderFail",
       payload:
         (error.response &&
           error.response.data &&

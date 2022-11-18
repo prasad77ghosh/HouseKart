@@ -134,6 +134,13 @@
   padding: 10px;
   height: 500px;
 }
+.opt1 {
+  color: black;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px;
+  height: 500px;
+}
 
 /* choose file */
 #createProductFormFile > input {
