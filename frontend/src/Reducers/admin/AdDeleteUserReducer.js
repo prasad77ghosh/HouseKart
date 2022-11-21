@@ -6,21 +6,21 @@ const initialState = {
   error: null,
 };
 
-const AdDeleteProductReducer = createReducer(initialState, {
-  deleteProductRequest: (state) => {
+const AdDeleteUserReducer = createReducer(initialState, {
+  deleteUserRequest: (state) => {
     state.loading = true;
   },
-  deleteProductSuccess: (state, action) => {
+  deleteUserSuccess: (state, action) => {
     state.loading = true;
     state.success = action.payload;
   },
 
-  deleteProductFail: (state, action) => {
+  deleteUserFail: (state, action) => {
     state.loading = false;
     state.error = action.payload;
   },
 
-  deleteProductReset: (state) => {
+  deleteUserReset: (state) => {
     state.loading = false;
     state.success = false;
   },
@@ -29,4 +29,4 @@ const AdDeleteProductReducer = createReducer(initialState, {
   },
 });
 
-export default AdDeleteProductReducer;
+export default AdDeleteUserReducer;

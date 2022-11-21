@@ -180,7 +180,6 @@ exports.updateProfile = catchAsyncError(async (req, res, next) => {
   if (req.body.avatar !== "") {
     const user = await User.findById(req.user.id);
     const image_id = user.avatar.public_id;
-    console.log(image_id);
     await cloudinary.v2.uploader.destroy(image_id);
     const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
       folder: "HouseKart",
@@ -261,6 +260,8 @@ exports.deleteUser = catchAsyncError(async (req, res, next) => {
     );
   }
 
+  const image_id = user.avatar.public_id;
+  await cloudinary.v2.uploader.destroy(image_id);
   await user.remove();
 
   res.status(200).json({

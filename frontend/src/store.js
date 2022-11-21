@@ -16,6 +16,10 @@ import UpdateProductReducer from "./Reducers/admin/UpdateProductReducer";
 import AdOrderReducer from "./Reducers/admin/AdOrderReducer";
 import AdOrderDeleteReducer from "./Reducers/admin/AdOrderDeleteReducer";
 import AdOrderUpdateReducer from "./Reducers/admin/AdOrderUpdate";
+import AdUserReducer from "./Reducers/admin/AdUserReducer";
+import AdDeleteUserReducer from "./Reducers/admin/AdDeleteUserReducer";
+import UpdateUserReducer from "./Reducers/admin/UpdateUserReducer";
+import AdUserDetailsReducer from "./Reducers/admin/AdUserDetailsReducer";
 
 const store = configureStore({
   reducer: {
@@ -36,6 +40,10 @@ const store = configureStore({
     AdOrderReducer,
     AdOrderDeleteReducer,
     AdOrderUpdateReducer,
+    AdUserReducer,
+    AdDeleteUserReducer,
+    UpdateUserReducer,
+    AdUserDetailsReducer,
   },
 });
 

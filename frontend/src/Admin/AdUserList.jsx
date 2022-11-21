@@ -2,41 +2,37 @@ import React, { useEffect } from "react";
 import { Box, Text, useToast, Spinner } from "@chakra-ui/react";
 import Sidebar from "./Sidebar";
 import { useDispatch, useSelector } from "react-redux";
-import { allRawProducts } from "../Actions/Products";
-import { deleteProduct } from "../Actions/Products";
-import "./AdProducts.css";
+import "./AdUserList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { MdEdit } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { allUserOfAdmin } from "../Actions/AdUser";
+import { userDeleteOfAdmin } from "../Actions/AdUser";
 
-const AdProducts = () => {
+const AdUserList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toast = useToast();
-  const { loading, data, error } = useSelector(
-    (state) => state.RawProductsReducer
-  );
 
-  const { success, error: deleteError } = useSelector(
-    (state) => state.DeleteProductReducer
+  const { loading, users, error } = useSelector((state) => state.AdUserReducer);
+  const { success, error: deleteUserError } = useSelector(
+    (state) => state.AdDeleteUserReducer
   );
-  
-  const { products } = data;
 
   useEffect(() => {
-    dispatch(allRawProducts());
+    dispatch(allUserOfAdmin());
   }, [dispatch]);
 
-  const deleteProductHandler = (id) => {
-    dispatch(deleteProduct(id));
+  const deleteUserHandler = (id) => {
+    dispatch(userDeleteOfAdmin(id));
   };
 
   useEffect(() => {
     if (success) {
       toast({
-        title: "Product Deleted Successfully",
+        title: "User Deleted Successfully",
         status: "success",
         duration: 2000,
         isClosable: true,
@@ -45,7 +41,7 @@ const AdProducts = () => {
 
       navigate("/admin/dashboard");
       dispatch({
-        type: "deleteProductReset",
+        type: "deleteUserReset",
       });
     }
   }, [success, dispatch, toast]);
@@ -64,9 +60,9 @@ const AdProducts = () => {
       });
     }
 
-    if (deleteError) {
+    if (deleteUserError) {
       toast({
-        title: deleteError,
+        title: deleteUserError,
         status: "error",
         duration: 2000,
         isClosable: true,
@@ -76,32 +72,37 @@ const AdProducts = () => {
         type: "clearError",
       });
     }
-  }, [dispatch, error, toast, deleteError]);
+  }, [dispatch, error, toast, deleteUserError]);
 
   const columns = [
-    { field: "id", headerName: "Product ID", minWidth: 200, flex: 0.5 },
+    { field: "id", headerName: "User ID", minWidth: 180, flex: 0.6 },
 
     {
-      field: "name",
-      headerName: "Name",
-      minWidth: 350,
+      field: "email",
+      headerName: "Email",
+      minWidth: 200,
       flex: 0.7,
     },
     {
-      field: "stock",
-      headerName: "Stock",
-      type: "number",
+      field: "name",
+      headerName: "Name",
       minWidth: 150,
-      flex: 0.3,
+      flex: 0.5,
     },
 
     {
-      field: "price",
-      headerName: "Price",
+      field: "role",
+      headerName: "Role",
       type: "number",
-      minWidth: 270,
-      flex: 0.5,
+      minWidth: 150,
+      flex: 0.3,
+      cellClassName: (params) => {
+        return params.getValue(params.id, "role") === "admin"
+          ? "greenColor"
+          : "redColor";
+      },
     },
+
     {
       field: "actions",
       flex: 0.3,
@@ -112,7 +113,7 @@ const AdProducts = () => {
       renderCell: (params) => {
         return (
           <>
-            <Link to={`/admin/product/${params.getValue(params.id, "id")}`}>
+            <Link to={`/admin/user/${params.getValue(params.id, "id")}`}>
               <Box
                 p={1}
                 _hover={{
@@ -129,9 +130,9 @@ const AdProducts = () => {
               _hover={{
                 color: "#E53E3E",
               }}
-              onClick={() => {
-                deleteProductHandler(params.getValue(params.id, "id"));
-              }}
+              onClick={() =>
+                deleteUserHandler(params.getValue(params.id, "id"))
+              }
             >
               <MdDeleteOutline size={20} />
             </Box>
@@ -142,13 +143,13 @@ const AdProducts = () => {
   ];
 
   const rows = [];
-  products &&
-    products.forEach((item) => {
+  users &&
+    users.forEach((user) => {
       rows.push({
-        id: item._id,
-        stock: item.Stock,
-        price: item.price,
-        name: item.name,
+        id: user._id,
+        role: user.role,
+        email: user.email,
+        name: user.name,
       });
     });
 
@@ -166,7 +167,7 @@ const AdProducts = () => {
             color="gray.50"
             mb={3}
           >
-            ALL PRODUCTS
+            ALL USERS
           </Text>
 
           {loading ? (
@@ -197,4 +198,4 @@ const AdProducts = () => {
   );
 };
 
-export default AdProducts;
+export default AdUserList;

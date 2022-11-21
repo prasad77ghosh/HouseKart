@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { allRawProducts } from "../Actions/Products";
 import { Link } from "react-router-dom";
 import { getAllOrdersOfAdmin } from "../Actions/Order";
+import { allUserOfAdmin } from "../Actions/AdUser";
 const DashBoard = () => {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.RawProductsReducer);
@@ -17,11 +18,14 @@ const DashBoard = () => {
     error,
   } = useSelector((state) => state.AdOrderReducer);
 
+  const { users } = useSelector((state) => state.AdUserReducer);
+
   const { orders } = OrderData;
 
   useEffect(() => {
     dispatch(allRawProducts());
     dispatch(getAllOrdersOfAdmin());
+    dispatch(allUserOfAdmin());
   }, [dispatch]);
 
   const { products } = data;
@@ -93,7 +97,7 @@ const DashBoard = () => {
                 <Text fontSize="xl">{products && products.length}</Text>
               </Box>
             </Link>
-            <Link to = "/admin/orders">
+            <Link to="/admin/orders">
               <Box
                 bg="#3182CE"
                 width="250px"
@@ -108,19 +112,21 @@ const DashBoard = () => {
                 <Text fontSize="xl">{orders && orders.length}</Text>
               </Box>
             </Link>
-            <Box
-              bg="#00A3C4"
-              width="250px"
-              minW="fit-content"
-              p={3}
-              borderRadius="10px"
-              textAlign="center"
-            >
-              <Text fontSize="2xl" fontWeight="medium">
-                Users
-              </Text>
-              <Text fontSize="xl">1000</Text>
-            </Box>
+            <Link to = "/admin/users">
+              <Box
+                bg="#00A3C4"
+                width="250px"
+                minW="fit-content"
+                p={3}
+                borderRadius="10px"
+                textAlign="center"
+              >
+                <Text fontSize="2xl" fontWeight="medium">
+                  Users
+                </Text>
+                <Text fontSize="xl">{users && users.length}</Text>
+              </Box>
+            </Link>
             <Box
               bg="purple.800"
               width="250px"
