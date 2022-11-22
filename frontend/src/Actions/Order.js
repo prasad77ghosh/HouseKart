@@ -137,7 +137,7 @@ export const updateOrderOfAdmin = (id, myForm) => async (dispatch) => {
     });
 
     const { data } = await http.put(url, myForm);
-    console.log(data)
+    console.log(data);
     dispatch({
       type: "updateOrderSuccess",
       payload: data.success,
@@ -145,6 +145,57 @@ export const updateOrderOfAdmin = (id, myForm) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "updateOrderFail",
+      payload:
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString(),
+    });
+  }
+};
+
+// All reviews for a order admin
+
+export const allReviewsOfProductAdmin = (productId) => async (dispatch) => {
+  const url = `/reviews?id=${productId}`;
+  try {
+    dispatch({
+      type: "getAllReviewsRequest",
+    });
+    const { data } = await http.get(url);
+    dispatch({
+      type: "getAllReviewsSuccess",
+      payload: data.reviews,
+    });
+  } catch (error) {
+    dispatch({
+      type: "getAllReviewsFail",
+      payload:
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString(),
+    });
+  }
+};
+
+// delete review admin
+export const deleteReviewAdmin = (reviewId, productId) => async (dispatch) => {
+  const url = `/reviews?id=${reviewId}&productId=${productId}`;
+  try {
+    dispatch({
+      type: "deleteReviewRequest",
+    });
+    const { data } = await http.delete(url);
+    dispatch({
+      type: "deleteReviewSuccess",
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: "deleteReviewFail",
       payload:
         (error.response &&
           error.response.data &&

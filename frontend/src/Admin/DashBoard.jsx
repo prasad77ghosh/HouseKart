@@ -38,6 +38,12 @@ const DashBoard = () => {
       }
     });
 
+  let totalAmount = 0;
+  orders &&
+    orders.forEach((item) => {
+      totalAmount += item.totalPrice;
+    });
+
   const lineState = {
     labels: ["Initial Amount", "Amount Earned"],
     datasets: [
@@ -45,7 +51,7 @@ const DashBoard = () => {
         label: "TOTAL AMOUNT",
         backgroundColor: ["tomato"],
         hoverBackgroundColor: ["rgb(197, 72, 49)"],
-        data: [0, 4000],
+        data: [0, totalAmount],
         borderColor: "#0BC5EA",
         borderWidth: 1,
       },
@@ -112,7 +118,7 @@ const DashBoard = () => {
                 <Text fontSize="xl">{orders && orders.length}</Text>
               </Box>
             </Link>
-            <Link to = "/admin/users">
+            <Link to="/admin/users">
               <Box
                 bg="#00A3C4"
                 width="250px"
@@ -138,7 +144,7 @@ const DashBoard = () => {
               <Text fontSize="2xl" fontWeight="line-state">
                 Total Amount
               </Text>
-              <Text fontSize="xl">₹ 4500000</Text>
+              <Text fontSize="xl">₹ {totalAmount}</Text>
             </Box>
           </Box>
           <Box

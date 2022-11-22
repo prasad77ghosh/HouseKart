@@ -38,6 +38,7 @@ import AdOrders from "./Admin/AdOrders";
 import AdUpdateOrder from "./Admin/AdUpdateOrder";
 import AdUserList from "./Admin/AdUserList";
 import AdUpdateUser from "./Admin/AdUpdateUser";
+import AdProductReviews from "./Admin/AdProductReviews";
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
   async function getStripeApiKey() {
@@ -103,6 +104,7 @@ function App() {
               <Route path="admin/order/:id" element={<AdUpdateOrder />} />
               <Route path="admin/users" element={<AdUserList />} />
               <Route path="admin/user/:id" element={<AdUpdateUser />} />
+              <Route path="admin/reviews" element={<AdProductReviews />} />
             </Route>
           </Routes>
           <Footer />
