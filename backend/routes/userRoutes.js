@@ -12,6 +12,7 @@ const {
   getUserDetailsAdmin,
   updateUserRole,
   deleteUser,
+  sendMessage,
 } = require("../controllers/userController");
 
 const { isAuthUser, authRoles } = require("../middlewares/auth");
@@ -32,5 +33,7 @@ router
   .get(isAuthUser, authRoles("admin"), getUserDetailsAdmin)
   .put(isAuthUser, authRoles("admin"), updateUserRole)
   .delete(isAuthUser, authRoles("admin"), deleteUser);
+
+router.route("/admin/contact").post(sendMessage);
 
 module.exports = router;

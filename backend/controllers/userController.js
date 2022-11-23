@@ -5,7 +5,6 @@ const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 const cloudinary = require("cloudinary");
-const { log } = require("console");
 
 //Register a user
 
@@ -268,4 +267,26 @@ exports.deleteUser = catchAsyncError(async (req, res, next) => {
     success: true,
     message: "User Deleted Successfully",
   });
+});
+
+exports.sendMessage = catchAsyncError(async (req, res, next) => {
+  const { name, email, chat } = req.body;
+  const subject = `Message from ${email}`;
+  const message = `Hello My Name is ${name}\n ${chat}`;
+
+  try {
+    sendEmail({
+      email: process.env.ADMIN_EMAIL,
+      subject,
+      message,
+    });
+    res.status(200).json({
+      success: true,
+      message: "Your Message Send To Admin Successfully..",
+    });
+  } catch (error) {
+    return next(
+      new ErrorHandler("Something went wrong message not send to admin", 400)
+    );
+  }
 });

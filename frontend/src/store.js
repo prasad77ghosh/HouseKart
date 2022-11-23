@@ -22,6 +22,7 @@ import UpdateUserReducer from "./Reducers/admin/UpdateUserReducer";
 import AdUserDetailsReducer from "./Reducers/admin/AdUserDetailsReducer";
 import AdReviewsReducer from "./Reducers/admin/AdReviewsReducer";
 import AdDeleteReviewReducer from "./Reducers/admin/AdReviewDeleteReducer";
+import ContactReducer from "./Reducers/ContactReducer";
 
 const store = configureStore({
   reducer: {
@@ -48,6 +49,7 @@ const store = configureStore({
     AdUserDetailsReducer,
     AdReviewsReducer,
     AdDeleteReviewReducer,
+    ContactReducer,
   },
 });
 

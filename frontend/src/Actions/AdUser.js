@@ -104,3 +104,28 @@ export const userDetailsOfAdmin = (id) => async (dispatch) => {
     });
   }
 };
+
+export const contactAction = (name, email, chat) => async (dispatch) => {
+  const url = "/admin/contact";
+  try {
+    dispatch({
+      type: "sendMessageRequest",
+    });
+
+    const { data } = await http.post(url, { name, email, chat });
+    dispatch({
+      type: "sendMessageSuccess",
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: "sendMessageFail",
+      payload:
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString(),
+    });
+  }
+};
