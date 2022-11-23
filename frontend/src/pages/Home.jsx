@@ -45,7 +45,7 @@ const Home = () => {
         alignItems="center"
         justifyContent="center"
         bg="purple.900"
-        height="92vh"
+        minH="100vh"
       >
         <Box
           mb={{ base: "40%", md: "10%" }}

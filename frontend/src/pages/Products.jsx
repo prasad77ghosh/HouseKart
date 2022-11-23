@@ -55,7 +55,7 @@ const Products = () => {
 
   return (
     <>
-      <Box width="80%" margin="0 auto">
+      <Box width="80%" margin="0 auto" minH="100vh" maxW="90%">
         <PropsBar
           price={price}
           setPrice={setPrice}
