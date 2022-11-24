@@ -12,9 +12,8 @@ const corsOptions = {
 };
 
 //config
-if (process.env.NODE_ENV !== "PRODUCTION") {
-  require("dotenv").config({ path: "backend/config/config.env" });
-}
+
+require("dotenv").config({ path: "backend/config/config.env" });
 
 app.use(cors(corsOptions));
 app.use(express.json({ limit: "20mb" }));
@@ -32,8 +31,6 @@ app.use("/api/v1", productsRoutes);
 app.use("/api/v1", usersRoutes);
 app.use("/api/v1", ordersRoutes);
 app.use("/api/v1", paymentRoute);
-
-
 
 // middlewares for error
 
