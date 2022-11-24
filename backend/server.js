@@ -1,5 +1,6 @@
 const app = require("./app");
 const connectDB = require("./config/database");
+const path = require("path");
 const cloudinary = require("cloudinary");
 
 //handling uncought expection
@@ -23,6 +24,21 @@ cloudinary.config({
 const server = app.listen(process.env.PORT, () => {
   console.log(`Listaning on port ${process.env.PORT}`);
 });
+
+// ------------------------------ Deployment Code --------------------------//
+const __dirname1 = path.resolve();
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname1, "/frontend/build")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is Running Successfully..");
+  });
+}
+
+// ------------------------------ Deployment Code --------------------------//
 
 // unHandled promise rejection
 process.on("uncaughtException", (error) => {
