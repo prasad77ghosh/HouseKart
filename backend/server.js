@@ -2,6 +2,7 @@ const app = require("./app");
 const connectDB = require("./config/database");
 const cloudinary = require("cloudinary");
 const express = require("express");
+const path = require("path");
 
 //handling uncought expection
 process.on("uncaughtException", (error) => {
@@ -24,6 +25,15 @@ cloudinary.config({
 const server = app.listen(process.env.PORT, () => {
   console.log(`Listaning on port ${process.env.PORT}`);
 });
+
+
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../frontend", "build", "index.html"));
+});
+
+
 
 // unHandled promise rejection
 process.on("uncaughtException", (error) => {

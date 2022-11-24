@@ -35,11 +35,6 @@ app.use("/api/v1", ordersRoutes);
 app.use("/api/v1", paymentRoute);
 
 // middlewares for error
-app.use(express.static(path.join(__dirname, "../frontend/build")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../frontend", "build", "index.html"));
-});
 
 app.use(errorMiddleware);
 
