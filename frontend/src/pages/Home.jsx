@@ -8,8 +8,10 @@ import { allProducts } from "../Actions/Products";
 import Product from "../Components/ProductComponents/Product";
 import Loader from "../Components/ProductComponents/Loader";
 import MetaData from "../MetaData";
+import { useRef } from "react";
 const Home = () => {
   const dispatch = useDispatch();
+  const scrllDown = useRef(null);
   const toast = useToast();
   const { loading, data, error } = useSelector(
     (state) => state.ProductsReducer
@@ -39,9 +41,16 @@ const Home = () => {
     }
   }, [dispatch, error, toast]);
 
+  const scrollDownHandler = (elementRef) => {
+    window.scrollTo({
+      top: elementRef.current.offsetTop,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <>
-    <MetaData title="HOUSE-KART-(HOME)"/>
+      <MetaData title="HOUSE-KART-(HOME)" />
       <Box
         display="flex"
         alignItems="center"
@@ -117,6 +126,7 @@ const Home = () => {
               borderWidth: "1px",
               transition: "all 0.50s ease",
             }}
+            onClick={() => scrollDownHandler(scrllDown)}
           >
             <Box mt={1} display={{ base: "none", md: "block" }}>
               <BsChevronDown size="25" />
@@ -132,7 +142,7 @@ const Home = () => {
           </Box>
         </Box>
       </Box>
-      <Box width="80%" margin="0 auto" mb={5} mt={5}>
+      <Box width="80%" margin="0 auto" mb={5} mt={5} ref={scrllDown}>
         <Box
           textAlign="center"
           borderBottom="2px solid tomato"

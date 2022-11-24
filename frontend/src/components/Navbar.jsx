@@ -1,7 +1,7 @@
 import { Box, Container, Flex, HStack, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import Kart from "../img/kart.png";
-import { Link } from "react-router-dom";
+import { Link,NavLink } from "react-router-dom";
 import { FaShoppingBag } from "react-icons/fa";
 import { BsPersonCircle } from "react-icons/bs";
 import MobilaNavbar from "./ExtraComponents/MobilaNavbar";

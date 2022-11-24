@@ -1,9 +1,10 @@
 import { Box, Image, Text, Badge } from "@chakra-ui/react";
 import React from "react";
+import { Link } from "react-router-dom";
 const CartItemBox = ({ item, deleteItemFromCart }) => {
   return (
     <>
-      <Box display="flex">
+      <Box display="flex" alignItems="center" gap={2}>
         <Box>
           <Image
             src={item.image}
@@ -14,9 +15,11 @@ const CartItemBox = ({ item, deleteItemFromCart }) => {
           />
         </Box>
         <Box>
-          <Text fontWeight="medium" fontSize={{ base: "13px", md: "19px" }}>
-            {item.name}
-          </Text>
+          <Link to = {`product/${item.product}`}>
+            <Text fontWeight="medium" fontSize={{ base: "13px", md: "19px" }}>
+              {item.name}
+            </Text>
+          </Link>
           <Text
             fontSize={{ base: "10px", md: "15px" }}
             fontWeight="medium"

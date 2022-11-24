@@ -51,6 +51,10 @@ function App() {
     getStripeApiKey();
   }, []);
 
+  window.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+  });
+
   return (
     <>
       <div className="main-body">
@@ -60,14 +64,15 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
-            <Route path="product/:id" element={<ProductDetails />} />
             <Route path="products" element={<Products />} />
+            <Route path="product/:id" element={<ProductDetails />} />
             <Route path="products/product/:id" element={<ProductDetails />} />
-            <Route path="products/:keyword" element={<Products />} />
             <Route
               path="products/:keyword/product/:id"
               element={<ProductDetails />}
             />
+            <Route path="cart/product/:id" element={<ProductDetails />} />
+            <Route path="products/:keyword" element={<Products />} />
             <Route path="products/:price" element={<Products />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
