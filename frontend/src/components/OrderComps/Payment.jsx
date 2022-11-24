@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { orderCreation } from "../../Actions/Order";
+import MetaData from "../../MetaData";
 
 const Payment = () => {
   const orderInfo = JSON.parse(sessionStorage.getItem("order_info"));
@@ -128,6 +129,7 @@ const Payment = () => {
   }, [dispatch, toast, error]);
   return (
     <>
+      <MetaData title="HOUSE-KART-(ORDER_PAYMENT)"/>
       <div>
         <CheckOutStep activeStep={activeStep} />
         <div className="paymentContainer">

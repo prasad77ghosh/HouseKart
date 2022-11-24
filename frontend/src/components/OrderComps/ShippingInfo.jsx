@@ -10,6 +10,7 @@ import CheckOutStep from "../ExtraComponents/CheckOutStep";
 import { InfoOfShipping } from "../../Actions/CartAct";
 import { useSteps } from "chakra-ui-steps";
 import { useNavigate } from "react-router-dom";
+import MetaData from "../../MetaData";
 
 import {
   Box,
@@ -31,9 +32,9 @@ const ShippingInfo = () => {
     initialStep: 0,
   });
 
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const naviagte = useNavigate();
   const { ShippingInfo } = useSelector((state) => state.Cart);
@@ -77,6 +78,7 @@ const ShippingInfo = () => {
 
   return (
     <>
+      <MetaData title="HOUSE-KART-(ORDER_SHIPPING_INFO)"/>
       <Box p={2}>
         <CheckOutStep activeStep={activeStep} />
         <Box

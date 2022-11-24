@@ -8,6 +8,7 @@ import { removeItemFromCart } from "../Actions/CartAct";
 import { MdRemoveShoppingCart } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import MetaData from "../MetaData";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -43,15 +44,16 @@ const Cart = () => {
   };
 
   const checkOutHandler = () => {
-   if(isAuthenticated){
-    navigate("/shipping")
-   }else{
-    navigate("/login")
-   }
+    if (isAuthenticated) {
+      navigate("/shipping");
+    } else {
+      navigate("/login");
+    }
   };
 
   return (
     <>
+      <MetaData title="HOUSE-KART-(CART)" />
       {CartItems.length === 0 ? (
         <>
           <Box
@@ -73,7 +75,12 @@ const Cart = () => {
         </>
       ) : (
         <>
-          <Box width={{ base: "95%", md: "90%" }} margin="1rem auto" mb="3rem" minH="100vh">
+          <Box
+            width={{ base: "95%", md: "90%" }}
+            margin="1rem auto"
+            mb="3rem"
+            minH="100vh"
+          >
             <Box
               display="flex"
               alignItems="center"

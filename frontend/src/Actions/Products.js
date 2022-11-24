@@ -85,16 +85,17 @@ export const productDetails = (id) => async (dispatch) => {
 };
 
 // submit review
-export const reviewSubmit = (myForm) => async (dispatch) => {
+export const reviewSubmit = (rating, comment, id) => async (dispatch) => {
   const url = "/review";
   try {
     dispatch({
       type: "reviewSubmitRequest",
     });
-    const { data } = await http.put(url, myForm);
+    const { data } = await http.put(url, { rating, comment, id });
     dispatch({
       type: "reviewSubmitSuccess",
       payload: data.success,
+      
     });
   } catch (error) {
     dispatch({

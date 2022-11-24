@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Box, Button, Image, Text } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import MetaData from "../../MetaData";
 const UserInfo = () => {
   const { user, isAuthenticated } = useSelector((state) => state.AuthReducer);
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const UserInfo = () => {
   }, [navigate, isAuthenticated]);
   return (
     <>
+      <MetaData title="HOUSE-KART-(USER_INFO)"/>
       <Box bg="purple.900" color="gray.50" height="100vh">
         <Text
           fontSize={{ base: "xl", md: "2xl" }}

@@ -16,6 +16,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { passwordUpdate } from "../../Actions/Profile";
+import MetaData from "../../MetaData";
 
 const UpdatePassword = () => {
   const [showO, setShowO] = useState(false);
@@ -46,10 +47,9 @@ const UpdatePassword = () => {
     dispatch(passwordUpdate(oldPassword, newPassword, confirmPassword));
   };
 
-
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     if (error) {
@@ -82,7 +82,8 @@ const UpdatePassword = () => {
 
   return (
     <>
-      <Box p={2} >
+      <MetaData title="HOUSE-KART-(UPDATE_PASSWORD)"/>
+      <Box p={2}>
         <Box
           width={{ base: "xs", md: "lg" }}
           margin="2rem auto"

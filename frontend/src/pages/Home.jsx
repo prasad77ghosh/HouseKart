@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { allProducts } from "../Actions/Products";
 import Product from "../Components/ProductComponents/Product";
 import Loader from "../Components/ProductComponents/Loader";
+import MetaData from "../MetaData";
 const Home = () => {
   const dispatch = useDispatch();
   const toast = useToast();
@@ -40,6 +41,7 @@ const Home = () => {
 
   return (
     <>
+    <MetaData title="HOUSE-KART-(HOME)"/>
       <Box
         display="flex"
         alignItems="center"

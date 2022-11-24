@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { passwordReset } from "../../Actions/Profile";
+import MetaData from "../../MetaData";
 
 const ResetPassword = () => {
   const [showN, setShowN] = useState(false);
@@ -45,10 +46,9 @@ const ResetPassword = () => {
     dispatch(passwordReset(token, newPassword, confirmPassword));
   };
 
-
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     if (error) {
@@ -78,6 +78,7 @@ const ResetPassword = () => {
 
   return (
     <>
+      <MetaData title="HOUSE-KART-(RESET_PASSWORD)"/>
       <Box p={2} height="100vh">
         <Box
           width={{ base: "xs", md: "lg" }}

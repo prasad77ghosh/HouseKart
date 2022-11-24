@@ -8,6 +8,7 @@ import Product from "../Components/ProductComponents/Product";
 import Loader from "../Components/ProductComponents/Loader";
 import Pagination from "react-js-pagination";
 import { useState } from "react";
+import MetaData from "../MetaData";
 const Products = () => {
   const dispatch = useDispatch();
   const toast = useToast();
@@ -55,6 +56,7 @@ const Products = () => {
 
   return (
     <>
+    <MetaData title="HOUSE-KART-(PRODUCTS)"/>
       <Box width="80%" margin="0 auto" minH="100vh" maxW="90%">
         <PropsBar
           price={price}

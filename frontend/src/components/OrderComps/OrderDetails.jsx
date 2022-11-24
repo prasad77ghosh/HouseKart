@@ -4,6 +4,7 @@ import { Box, Spinner, Text, useToast, Image } from "@chakra-ui/react";
 import { useParams, Link } from "react-router-dom";
 import { detailsOfOrder } from "../../Actions/Order";
 import { useEffect } from "react";
+import MetaData from "../../MetaData";
 
 const OrderDetails = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ const OrderDetails = () => {
 
   return (
     <>
+      <MetaData title="HOUSE-KART-(ORDER_DETAILS)"/>
       {loading ? (
         <>
           <Box margin="4rem auto">
@@ -201,8 +203,7 @@ const OrderDetails = () => {
                         ? "greenColor"
                         : "redColor"
                     }
-
-                    style = {{fontSize: "20px", fontWeight: "700"}}
+                    style={{ fontSize: "20px", fontWeight: "700" }}
                   >
                     {order.orderStatus && order.orderStatus}
                   </p>

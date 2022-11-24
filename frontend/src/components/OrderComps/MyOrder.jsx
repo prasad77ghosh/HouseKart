@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { myOrders } from "../../Actions/Order";
 import { MdLaunch } from "react-icons/md";
 import { Link } from "react-router-dom";
+import MetaData from "../../MetaData";
 
 const MyOrder = () => {
   const dispatch = useDispatch();
@@ -99,6 +100,7 @@ const MyOrder = () => {
 
   return (
     <>
+      <MetaData title="HOUSE-KART-(ORDER)"/>
       {loading ? (
         <>
           <Box margin="50% auto">

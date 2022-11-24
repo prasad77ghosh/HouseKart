@@ -1,11 +1,12 @@
 import { Text, Box, Image, Button } from "@chakra-ui/react";
 import React from "react";
 import { useEffect } from "react";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import CheckOutStep from "../ExtraComponents/CheckOutStep";
 import { useSteps } from "chakra-ui-steps";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import MetaData from "../../MetaData";
 
 const ConfirmOrder = () => {
   const { nextStep, activeStep } = useSteps({
@@ -43,6 +44,7 @@ const ConfirmOrder = () => {
 
   return (
     <>
+      <MetaData title="HOUSE-KART-(ORDER-CONFIRM)"/>
       <Box>
         <CheckOutStep activeStep={activeStep} />
         <Box

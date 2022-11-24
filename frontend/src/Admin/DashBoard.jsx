@@ -9,6 +9,7 @@ import { allRawProducts } from "../Actions/Products";
 import { Link } from "react-router-dom";
 import { getAllOrdersOfAdmin } from "../Actions/Order";
 import { allUserOfAdmin } from "../Actions/AdUser";
+import MetaData from "../MetaData";
 const DashBoard = () => {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.RawProductsReducer);
@@ -72,6 +73,7 @@ const DashBoard = () => {
 
   return (
     <>
+      <MetaData title="HOUSE-KART-(DASHBOARD)"/>
       <Box display="flex" bg="gray.50" minHeight="100vh" p={1} gap={2}>
         <Box flexBasis="15%" position="relative">
           <Sidebar />

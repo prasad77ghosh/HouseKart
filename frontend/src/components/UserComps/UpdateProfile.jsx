@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { profileUpdate } from "../../Actions/Profile";
 import Profile from "../../img/Profile.png";
 import { userInfo } from "../../Actions/Auth";
+import MetaData from "../../MetaData";
 
 const UpdateProfile = () => {
   const [name, setName] = useState("");
@@ -96,6 +97,7 @@ const UpdateProfile = () => {
   }, [dispatch, error, isUpdated, toast, navigate]);
   return (
     <>
+      <MetaData title="HOUSE-KART-(UPDATE_PROFILE)"/>
       <Box p={2}>
         <Box
           width={{ base: "xs", md: "lg" }}

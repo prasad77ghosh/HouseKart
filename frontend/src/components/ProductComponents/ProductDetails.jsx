@@ -6,6 +6,7 @@ import { productDetails } from "../../Actions/Products";
 import Slider from "react-slick";
 import { Rating } from "@material-ui/lab";
 import ReviewSubmit from "../ExtraComponents/ReviewSubmit";
+import MetaData from "../../MetaData";
 import {
   Box,
   Image,
@@ -111,6 +112,7 @@ const ProductDetails = () => {
 
   return (
     <>
+      <MetaData title="HOUSE-KART-(PRODUCT_DETAILS)" />
       {loading ? (
         <Box
           display="flex"

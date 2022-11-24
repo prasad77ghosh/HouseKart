@@ -4,11 +4,11 @@ import { Rating } from "@material-ui/lab";
 import { Link } from "react-router-dom";
 
 const Product = ({ product }) => {
-   const options = {
-     value: product.ratings,
-     readOnly: true,
-     precision: 0.5,
-   };
+  const options = {
+    value: product.ratings,
+    readOnly: true,
+    precision: 0.5,
+  };
   return (
     <>
       <Link to={`product/${product._id}`}>

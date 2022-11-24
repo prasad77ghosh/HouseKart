@@ -1,8 +1,15 @@
 import React from "react";
 import { Box, Text } from "@chakra-ui/react";
+import { useEffect } from "react";
+import MetaData from "../MetaData";
 const About = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
+      <MetaData title="HOUSE-KART-(ABOUT)"/>
       <Box minH="100vh" width="80%" maxW="90%" margin="0 auto">
         <Box
           bg="purple.900"

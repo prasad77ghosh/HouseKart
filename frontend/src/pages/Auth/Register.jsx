@@ -21,6 +21,7 @@ import Profile from "../../img/Profile.png";
 import { userRegister } from "../../Actions/Auth";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import MetaData from "../../MetaData";
 
 const Register = () => {
   const [show, setShow] = useState(false);
@@ -34,9 +35,9 @@ const Register = () => {
   const dispatch = useDispatch();
   const toast = useToast();
   const navigate = useNavigate();
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { loading, isAuthenticated, error } = useSelector(
     (state) => state.AuthReducer
   );
@@ -100,6 +101,7 @@ const Register = () => {
 
   return (
     <>
+      <MetaData title="HOUSE-KART-(SIGN-UP)"/>
       <Box p={2}>
         <Box
           width={{ base: "xs", md: "lg" }}

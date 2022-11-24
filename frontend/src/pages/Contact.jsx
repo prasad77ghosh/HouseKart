@@ -17,6 +17,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { contactAction } from "../Actions/AdUser";
 import { useEffect } from "react";
+import MetaData from "../MetaData";
 const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -33,6 +34,10 @@ const Contact = () => {
     setEmail("");
     setChat("");
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     if (success) {
@@ -64,6 +69,7 @@ const Contact = () => {
 
   return (
     <>
+      <MetaData title="HOUSE-KART-(CONTACT)"/>
       <Box minH="100vh" width="80%" maxW="90%" margin="0 auto">
         <Box
           width={{ base: "100%", md: "50%" }}

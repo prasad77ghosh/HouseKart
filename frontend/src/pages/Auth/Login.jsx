@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { userLogin } from "../../Actions/Auth";
 import { useNavigate } from "react-router-dom";
+import MetaData from "../../MetaData";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -31,9 +32,9 @@ const Login = () => {
   const { loading, isAuthenticated, error } = useSelector(
     (state) => state.AuthReducer
   );
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -69,6 +70,7 @@ const Login = () => {
 
   return (
     <>
+      <MetaData title="HOUSE-KART-(LOGIN)"/>
       <Box p={2}>
         <Box
           width={{ base: "xs", md: "lg" }}

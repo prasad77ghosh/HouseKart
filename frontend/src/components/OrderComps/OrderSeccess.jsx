@@ -2,10 +2,12 @@ import { Box, Button, Text } from "@chakra-ui/react";
 import React from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import MetaData from "../../MetaData";
 
 const OrderSeccess = () => {
   return (
     <>
+      <MetaData title="HOUSE-KART-(ORDER_SUCCESS)"/>
       <Box
         margin="10% auto"
         display="flex"
@@ -21,7 +23,7 @@ const OrderSeccess = () => {
         <Text fontSize={{ base: "xl", md: "2xl" }} fontWeight="medium">
           Your Orders has been Placed Successfully..
         </Text>
-        <Link to = "/order/me">
+        <Link to="/order/me">
           <Button colorScheme="facebook">View Orders</Button>
         </Link>
       </Box>

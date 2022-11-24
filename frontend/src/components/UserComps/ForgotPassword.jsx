@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { passwordForgot } from "../../Actions/Profile";
+import MetaData from "../../MetaData";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -70,6 +71,7 @@ const ForgotPassword = () => {
 
   return (
     <>
+    <MetaData title="HOUSE-KART-(FORGOT_PASSWORD)"/>
       <Box p={2} height="100vh">
         <Box
           width={{ base: "xs", md: "lg" }}

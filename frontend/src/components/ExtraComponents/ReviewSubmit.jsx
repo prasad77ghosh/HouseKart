@@ -14,6 +14,7 @@ import {
   useDisclosure,
   Textarea,
   useToast,
+  FormLabel,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
@@ -21,6 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { reviewSubmit } from "../../Actions/Products";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { FormControl } from "@material-ui/core";
 
 const ReviewSubmit = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -35,37 +37,6 @@ const ReviewSubmit = () => {
   );
   const toast = useToast();
 
-
-   useEffect(() => {
-     if (success) {
-       toast({
-         title: "Review submitted successfully..",
-         status: "success",
-         duration: 2000,
-         isClosable: true,
-         position: "bottom",
-       });
-
-       dispatch({
-         type: "reviewSubmitReset",
-       });
-     }
-     if (error) {
-       toast({
-         title: error,
-         status: "error",
-         duration: 2000,
-         isClosable: true,
-         position: "bottom",
-       });
-
-       dispatch({
-         type: "clearError",
-       });
-     }
-   }, [dispatch, error, toast, success]);
-
-
   const submitReviewHandler = () => {
     if (!rating || !comment) {
       toast({
@@ -77,15 +48,39 @@ const ReviewSubmit = () => {
       });
       return;
     }
-
-    const myForm = new FormData();
-
-    myForm.set("rating", rating);
-    myForm.set("comment", comment);
-    myForm.set("id", id);
-    dispatch(reviewSubmit(myForm));
+    dispatch(reviewSubmit(rating, comment, id));
     onClose();
   };
+
+    useEffect(() => {
+      if (success) {
+        toast({
+          title: "Review submitted successfully..",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+          position: "bottom",
+        });
+
+        dispatch({
+          type: "reviewSubmitReset",
+        });
+      }
+      if (error) {
+        toast({
+          title: error,
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+          position: "bottom",
+        });
+
+        dispatch({
+          type: "clearError",
+        });
+      }
+    }, [dispatch, error, toast, success]);
+
 
   return (
     <>
@@ -100,19 +95,21 @@ const ReviewSubmit = () => {
           <ModalCloseButton />
           <ModalBody>
             <Box display="flex" flexDirection="column" gap={2}>
-              <Box>
-                <Text fontSize="lg" mb={3}>
-                  Rate
-                </Text>
+              <FormControl isRequired mt={2}>
+                <FormLabel fontSize={{ base: "12px", md: "15px" }}>
+                  Rating
+                </FormLabel>
                 <Rating
                   onChange={(e) => setRating(e.target.value)}
                   value={rating}
                   size="large"
                 />
-              </Box>
+              </FormControl>
 
-              <Box>
-                <Text fontSize="lg">Comment</Text>
+              <FormControl isRequired mt={2}>
+                <FormLabel fontSize={{ base: "12px", md: "15px" }}>
+                  Comment
+                </FormLabel>
                 <Textarea
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
@@ -121,22 +118,22 @@ const ReviewSubmit = () => {
                   rows="5"
                   mt={2}
                 ></Textarea>
+              </FormControl>
+
+              <Box display="flex">
+                <Button colorScheme="red" mr={3} onClick={onClose}>
+                  Close
+                </Button>
+                <Button
+                  colorScheme="green"
+                  isLoading={loading}
+                  onClick={submitReviewHandler}
+                >
+                  Submit
+                </Button>
               </Box>
             </Box>
           </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="red" mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button
-              colorScheme="green"
-              isLoading={loading}
-              onClick={submitReviewHandler}
-            >
-              Submit
-            </Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
