@@ -22,19 +22,17 @@ cloudinary.config({
   api_key: process.env.API_KEY,
   api_secret: process.env.API_SECRET,
 });
-
-app.use(express.static(path.join(__dirname, "../frontend/build")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../frontend", "build", "index.html"));
-});
-
 const server = app.listen(process.env.PORT, () => {
   console.log(`Listaning on port ${process.env.PORT}`);
 });
 
 
 
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../frontend", "build", "index.html"));
+});
 
 
 
