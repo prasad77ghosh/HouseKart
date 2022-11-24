@@ -35,9 +35,9 @@ app.use("/api/v1", ordersRoutes);
 app.use("/api/v1", paymentRoute);
 
 app.use(express.static(path.join(__dirname, "../frontend/build")));
-app.get("*",(req, res) => {
-  res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
-})
+app.get("*", (req, res) => {
+  res.sendFile("index.html", { root: "../frontend/build" });
+});
 
 // middlewares for error
 
