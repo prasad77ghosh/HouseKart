@@ -4,7 +4,7 @@
   "description": "This is complete backend of ecommerce website",
   "main": "backend/server.js",
   "scripts": {
-    "start": "node backend/server.js",
+    "start": "node backend/app.js",
     "dev": "nodemon backend/server.js"
   },
   "author": "Prasad ghosh",
