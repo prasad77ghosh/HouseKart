@@ -2,6 +2,7 @@ const app = require("./app");
 const connectDB = require("./config/database");
 const path = require("path");
 const cloudinary = require("cloudinary");
+const express = require("express");
 
 //handling uncought expection
 process.on("uncaughtException", (error) => {
