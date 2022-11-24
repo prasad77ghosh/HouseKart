@@ -2,6 +2,7 @@ const cookieParser = require("cookie-parser");
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const path = require("path");
 const errorMiddleware = require("./middlewares/error");
 const bodyParser = require("body-parser");
 const fileupload = require("express-fileupload");
@@ -13,10 +14,12 @@ const corsOptions = {
 };
 
 //config
-dotenv.config({ path: "backend/config/config.env" });
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  require("dotenv").config({ path: "backend/config/config.env" });
+}
 
 app.use(cors(corsOptions));
-app.use(express.json({limit: "20mb"}));
+app.use(express.json({ limit: "20mb" }));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 app.use(fileupload());
@@ -31,6 +34,11 @@ app.use("/api/v1", productsRoutes);
 app.use("/api/v1", usersRoutes);
 app.use("/api/v1", ordersRoutes);
 app.use("/api/v1", paymentRoute);
+
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+app.get("*",(req, res) => {
+  res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+})
 
 // middlewares for error
 
