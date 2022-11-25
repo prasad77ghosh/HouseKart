@@ -9,7 +9,7 @@ const app = express();
 //config
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "https://busy-jade-seagull-tutu.cyclic.app",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
