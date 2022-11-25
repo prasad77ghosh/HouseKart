@@ -9,7 +9,7 @@ const app = express();
 //config
 
 const corsOptions = {
-  origin: "https://busy-jade-seagull-tutu.cyclic.app",
+  origin: "http://localhost:3000",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
@@ -40,7 +40,7 @@ app.use("/api/v1", paymentRoute);
 
 app.use(express.static(path.join(__dirname, "../frontend/build")));
 
-app.get("/*", (req, res) => {
+app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
 });
 
