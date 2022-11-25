@@ -17,7 +17,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cors({ credentials: true}));
+app.use(cors());
 app.use(express.json({ limit: "20mb" }));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
