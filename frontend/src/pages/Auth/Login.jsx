@@ -102,7 +102,6 @@ const Login = () => {
                 fontSize="16px"
                 borderColor="gray.50"
                 focusBorderColor="#68D391"
-                value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </InputGroup>
@@ -127,7 +126,6 @@ const Login = () => {
                 fontSize="16px"
                 borderColor="gray.50"
                 focusBorderColor="#68D391"
-                value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </InputGroup>
