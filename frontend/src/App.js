@@ -42,9 +42,7 @@ import AdProductReviews from "./Admin/AdProductReviews";
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
   async function getStripeApiKey() {
-    const { data } = await http.get(
-      "https://busy-jade-seagull-tutu.cyclic.app/stripeapikey"
-    );
+    const { data } = await http.get("/stripeapikey");
     setStripeApiKey(data.stripeApiKey);
   }
 
