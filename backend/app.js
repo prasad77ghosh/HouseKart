@@ -14,7 +14,7 @@ if (process.env.NODE_ENV !== "production") {
 
 
 
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(cors({ credentials: true}));
 app.use(express.json({ limit: "20mb" }));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
