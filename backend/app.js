@@ -18,16 +18,7 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config({ path: "backend/config/config.env" });
 }
 
-router.get("/", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader("Access-Control-Max-Age", "1800");
-  res.setHeader("Access-Control-Allow-Headers", "content-type");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "PUT, POST, GET, DELETE, PATCH, OPTIONS"
-  );
-});
+
 
 app.use(cors(corsOptions));
 app.use(express.json({ limit: "20mb" }));
