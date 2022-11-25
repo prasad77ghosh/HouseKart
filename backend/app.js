@@ -12,14 +12,7 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config({ path: "backend/config/config.env" });
 }
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  if (req.method === "OPTIONS") {
-    res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
-    return res.status(200).json({});
-  }
-  next();
-});
+
 
 app.use(cors({ credentials: true}));
 app.use(express.json({ limit: "20mb" }));
